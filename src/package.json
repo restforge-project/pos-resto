@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@restforgejs/platform": "^5.1.6"
+  }
+}

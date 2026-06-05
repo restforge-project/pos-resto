@@ -1,0 +1,9 @@
+# Folder yang tidak masuk repository
+co-work/
+design-template/
+
+# Dependencies
+node_modules/
+
+# Environment / kredensial
+**/config/*.env
