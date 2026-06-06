@@ -2,6 +2,9 @@
 co-work/
 design-template/
 
+# Source code lokal (tidak masuk repository)
+/src/
+
 # Dependencies
 node_modules/
 
