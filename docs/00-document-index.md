@@ -18,7 +18,7 @@
 
 POS Rumah Makan adalah sistem Point of Sale terintegrasi untuk operasional restoran, rumah makan, dan warung makan. Sistem ini menangani seluruh alur layanan — dari pemesanan di meja maupun kasir, pengiriman order ke dapur, pembayaran multi-metode, hingga pencatatan stok bahan baku dan pelaporan penjualan. Platform dirancang untuk mendukung operasi harian yang cepat dan andal, baik saat online maupun offline (offline-first), serta dapat berjalan pada perangkat kasir, tablet pelayan, dan layar dapur (Kitchen Display).
 
-Pembangunan dilakukan secara bertahap dalam beberapa fase dengan total 12 modul, sehingga setiap fase menghasilkan produk yang dapat langsung digunakan (MVP). Fase awal berfokus pada alur kasir inti (menu, order, pembayaran), kemudian diperluas dengan manajemen meja, dapur, inventori bahan baku, hingga loyalitas pelanggan dan analitik penjualan.
+Pembangunan dilakukan secara bertahap dalam beberapa fase dengan total 12 modul, sehingga setiap fase menghasilkan produk yang dapat langsung digunakan (MVP). Fase awal berfokus pada alur kasir inti (produk, order, pembayaran), kemudian diperluas dengan manajemen meja, dapur, inventori bahan baku, hingga loyalitas pelanggan dan analitik penjualan.
 
 ---
 
@@ -171,7 +171,7 @@ Sistem POS Rumah Makan terdiri dari 12 modul yang dibangun secara bertahap. Deta
 
 | ID | Modul | Ringkasan |
 |----|-------|-----------|
-| M-001 | Manajemen Produk & Kategori | Pengelolaan daftar menu, kategori, harga, varian, dan modifier (level pedas, topping, dll) |
+| M-001 | Manajemen Produk & Kategori | Pengelolaan daftar produk, kategori, harga, varian, dan modifier (level pedas, topping, dll) |
 | M-002 | Manajemen Order (Kasir & Pelayan) | Pembuatan dan perubahan order dari kasir maupun tablet pelayan |
 | M-003 | Manajemen Meja & Reservasi | Denah meja, status meja, penggabungan/pemindahan order, reservasi |
 | M-004 | Kitchen Display System (KDS) | Tampilan order untuk dapur, status pengerjaan, antrian masak |
@@ -180,7 +180,7 @@ Sistem POS Rumah Makan terdiri dari 12 modul yang dibangun secara bertahap. Deta
 | M-007 | Diskon, Promo & Voucher | Aturan diskon, promo waktu tertentu, voucher, dan paket bundling |
 | M-008 | Manajemen Pelanggan & Loyalitas | Data pelanggan, poin loyalitas, dan riwayat transaksi |
 | M-009 | Manajemen Karyawan & Shift | Akun karyawan, peran/hak akses, jadwal shift, dan buka/tutup kasir |
-| M-010 | Laporan & Analitik Penjualan | Laporan penjualan, menu terlaris, performa shift, dan margin |
+| M-010 | Laporan & Analitik Penjualan | Laporan penjualan, produk terlaris, performa shift, dan margin |
 | M-011 | Pengaturan & Multi-Outlet | Konfigurasi outlet, struk, perangkat, dan dukungan multi-cabang |
 | M-012 | Integrasi & Sinkronisasi Offline | Sinkronisasi offline-first, printer dapur/kasir, dan integrasi pihak ketiga |
 

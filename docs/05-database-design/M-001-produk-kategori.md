@@ -16,7 +16,7 @@
 
 > Skema ditulis dalam format **SDF RESTForge** (`schema/<table>.js`). Konvensi penamaan, kolom audit, dan tipe data mengikuti [README.md](README.md) index. Kebutuhan sumber: [PRD M-001](../03-product-requirements/M-001-produk-kategori.md).
 >
-> **Catatan penamaan (v1.1):** Entitas yang dijual memakai domain **`product`** (bukan `menu_item`) untuk menghindari kerancuan dengan "menu" navigasi UI. Istilah bisnis "menu" pada PRD tetap merujuk daftar hidangan rumah makan.
+> **Catatan penamaan (v1.2):** Seluruh terminologi modul diseragamkan memakai istilah **produk**. Entitas yang dijual memakai domain **`product`** (sebelumnya `menu_item`); istilah lama untuk daftar hidangan kini sepenuhnya digantikan oleh **produk**, baik pada dokumen ini maupun PRD.
 
 ---
 
@@ -48,7 +48,7 @@ Modul M-001 memerlukan lima tabel: satu untuk kategori produk, satu untuk produk
 | Tabel | Deskripsi | Relasi | Sumber |
 |-------|-----------|--------|--------|
 | `product_category` | Kategori produk | induk dari `product` | FR-001..004 |
-| `product` | Produk/item menu + harga dasar & status | `belongsTo product_category` | FR-005..010 |
+| `product` | Produk/item yang dijual + harga dasar & status | `belongsTo product_category` | FR-005..010 |
 | `product_variant` | Opsi varian produk (mis. ukuran) | `belongsTo product` | FR-011 |
 | `product_modifier_group` | Grup modifier (wajib/opsional, min/maks) | `belongsTo product` | FR-012/013 |
 | `product_modifier_option` | Opsi dalam grup modifier | `belongsTo product_modifier_group` | FR-012 |

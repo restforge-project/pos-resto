@@ -68,7 +68,7 @@ updated_by: 'string:100'
 | Status aktif/ketersediaan | `boolean default:true` | `is_active` = status aktif/nonaktif record; `is_available` = sold-out (BR-006, BR-010) |
 | Tanggal/waktu | `date` / `timestamp` | audit & tanggal transaksi |
 
-**Pola umum:** `is_active` adalah **status aktif/nonaktif** sebuah record (menampilkan/menyembunyikan dari operasi), **bukan** penanda penghapusan. Pencegahan penghapusan record yang masih direferensikan ditangani **FK `onDelete: restrict`** (BR-005), terpisah dari `is_active`. Ketersediaan menu memakai `is_available` (BR-010); seluruh nominal harga dijaga `>= 0` lewat CHECK constraint.
+**Pola umum:** `is_active` adalah **status aktif/nonaktif** sebuah record (menampilkan/menyembunyikan dari operasi), **bukan** penanda penghapusan. Pencegahan penghapusan record yang masih direferensikan ditangani **FK `onDelete: restrict`** (BR-005), terpisah dari `is_active`. Ketersediaan produk memakai `is_available` (BR-010); seluruh nominal harga dijaga `>= 0` lewat CHECK constraint.
 
 ---
 

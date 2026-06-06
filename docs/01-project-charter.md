@@ -30,7 +30,7 @@ Tujuan dirumuskan secara ringkas dan terukur:
 |------|--------|------------------------|
 | OBJ-1 | Mempercepat proses order dan pembayaran | Satu transaksi (order → bayar) dapat diselesaikan di bawah 60 detik |
 | OBJ-2 | Menyediakan POS yang cepat dan andal saat online | Operasi order → bayar berjalan lancar pada koneksi internet yang stabil |
-| OBJ-3 | Memberi pemilik visibilitas penjualan harian | Laporan penjualan & menu terlaris tersedia real-time |
+| OBJ-3 | Memberi pemilik visibilitas penjualan harian | Laporan penjualan & produk terlaris tersedia real-time |
 | OBJ-4 | Merilis MVP yang dapat dipakai pelanggan pertama | MVP (alur kasir inti) selesai dan dipakai minimal 1 rumah makan |
 
 > **Catatan revisi (2026-06-06):** Dukungan **offline-first ditunda** ke fase lanjutan karena framework backend (RESTForge) belum mendukung mode offline. Fokus MVP saat ini adalah operasi **online** dengan satu rumah makan pilot (single-tenant). Modul M-012 (Integrasi & Sinkronisasi Offline) tetap berada pada rencana pengembangan berikutnya.
@@ -94,7 +94,7 @@ Penjadwalan dibuat sederhana berbasis target MVP. Detail urutan modul akan dirin
 
 | Tahap | Fokus | Target |
 |-------|-------|--------|
-| M1 | Setup proyek, menu & order dasar | [DISESUAIKAN] |
+| M1 | Setup proyek, produk & order dasar | [DISESUAIKAN] |
 | M2 | Pembayaran + shift kasir + laporan dasar (MVP siap) | [DISESUAIKAN] |
 | M3 | Uji coba dengan rumah makan pilot & perbaikan | [DISESUAIKAN] |
 | M4 | Penambahan modul lanjutan (meja, dapur, inventori) | [DISESUAIKAN] |

@@ -75,7 +75,7 @@ NFR berlaku **lintas modul** dan menjadi acuan kualitas bagi seluruh berkas modu
 
 | ID | Kategori | Kebutuhan Non-Fungsional | Status |
 |----|----------|--------------------------|--------|
-| NFR-001 | Performa | *(akan diisi — mis. waktu respons pencarian menu, pemrosesan order)* | ☐ Draft |
+| NFR-001 | Performa | *(akan diisi — mis. waktu respons pencarian produk, pemrosesan order)* | ☐ Draft |
 | NFR-002 | Ketahanan Offline | *(akan diisi — operasi tetap berjalan tanpa internet, sinkron otomatis)* | ☐ Draft |
 | NFR-003 | Keamanan & Hak Akses | *(akan diisi — autentikasi, peran/hak akses)* | ☐ Draft |
 | NFR-004 | Keterpakaian (Usability) | *(akan diisi — kemudahan UI kasir)* | ☐ Draft |

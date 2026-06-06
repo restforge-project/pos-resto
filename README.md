@@ -34,7 +34,7 @@ Sistem terdiri dari 12 modul yang dibangun secara bertahap.
 
 | ID | Modul |
 |----|-------|
-| M-001 | Manajemen Menu & Kategori |
+| M-001 | Manajemen Produk & Kategori |
 | M-002 | Manajemen Order (Kasir & Pelayan) |
 | M-005 | Pembayaran & Split Bill |
 | M-009 | Manajemen Karyawan & Shift |
