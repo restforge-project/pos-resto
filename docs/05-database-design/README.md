@@ -13,19 +13,19 @@
 | **PIC** | Project Lead |
 | **Status** | Draft |
 
-> **Struktur dokumen:** Database design dipecah per modul agar tiap berkas tetap ringkas. **File ini (README)** memuat bagian bersama — konvensi penamaan, kolom audit standar, tipe data, dan indeks modul. **Skema tiap modul** berada pada berkas terpisah `M-NNN-<nama-modul>.md` di folder ini.
+> **Struktur dokumen:** Database design dipecah per modul agar tiap berkas tetap ringkas. **File ini (README)** memuat bagian bersama, yaitu konvensi penamaan, kolom audit standar, tipe data, dan indeks modul. **Skema tiap modul** berada pada berkas terpisah `M-NNN-<nama-modul>.md` di folder ini.
 
 ---
 
-## 1. Pendahuluan (Introduction)
+## 1. Pendahuluan
 
 Dokumen ini adalah **rujukan tunggal** untuk desain database POS Rumah Makan. Skema diturunkan dari kebutuhan pada [03-product-requirements](../03-product-requirements/README.md) dan mengikuti arsitektur backend pada [04-technical-specification](../04-technical-specification/README.md).
 
-Skema ditulis dalam format **SDF (Schema Definition File)** RESTForge — berkas `schema/<table>.js` yang mengekspor `defineModel(...)`. Dokumen ini **tidak menulis ulang spesifikasi SDF**; konvensi SDF dirujuk **berdasarkan nama** dari catalog RESTForge (lihat Bagian 5). Yang ditulis di sini adalah **skema konkret POS** (tabel, kolom, tipe, constraint, relasi) per modul.
+Skema ditulis dalam format **SDF (Schema Definition File)** RESTForge, yaitu berkas `schema/<table>.js` yang mengekspor `defineModel(...)`. Dokumen ini **tidak menulis ulang spesifikasi SDF**; konvensi SDF dirujuk **berdasarkan nama** dari catalog RESTForge (lihat Bagian 5). Yang ditulis di sini adalah **skema konkret POS** (tabel, kolom, tipe, constraint, relasi) per modul.
 
 ---
 
-## 2. Konvensi Penamaan (Naming Convention)
+## 2. Konvensi Penamaan
 
 Mengikuti konvensi SDF RESTForge:
 
@@ -41,7 +41,7 @@ Setiap model memakai `schema: 'public'` dan diletakkan pada satu berkas `schema/
 
 ---
 
-## 3. Kolom Audit Standar (Standard Audit Columns)
+## 3. Kolom Audit Standar
 
 Setiap tabel menyertakan empat kolom audit dengan deklarasi seragam berikut:
 
@@ -52,11 +52,11 @@ updated_at: 'timestamp',
 updated_by: 'string:100'
 ```
 
-> `updated_at` ditulis **plain** (`timestamp`). Auto-update ditangani oleh layer RDF (konvensi `auditColumns` di BaseModel runtime), **bukan** marker SDF — modifier `autoUpdate` sudah *deprecated*.
+> `updated_at` ditulis **plain** (`timestamp`). Auto-update ditangani oleh layer RDF (konvensi `auditColumns` di BaseModel runtime), **bukan** marker SDF; modifier `autoUpdate` sudah *deprecated*.
 
 ---
 
-## 4. Tipe Data & Pola yang Dipakai (Data Types & Patterns)
+## 4. Tipe Data & Pola yang Dipakai
 
 | Kebutuhan | Tipe SDF | Catatan |
 |-----------|----------|---------|
@@ -72,13 +72,13 @@ updated_by: 'string:100'
 
 ---
 
-## 5. Rujukan Spesifikasi SDF (by name)
+## 5. Rujukan Spesifikasi SDF (berdasarkan nama)
 
 Detail sintaks tidak diduplikasi di sini; lihat catalog SDF RESTForge berdasarkan nama: *Naming Convention*, *Field Shorthand*, *Field Types*, *Constraints*, *Check Constraints*, *Composite Unique*, *Foreign Keys*, *Relations*, *Indexes*.
 
 ---
 
-## 6. Indeks Modul (Module Index)
+## 6. Indeks Modul
 
 | ID | Modul | Berkas Skema | Tabel | Status |
 |----|-------|-------------|-------|--------|
@@ -90,6 +90,6 @@ Detail sintaks tidak diduplikasi di sini; lihat catalog SDF RESTForge berdasarka
 
 ---
 
-## Riwayat Perubahan (Changelog)
+## Riwayat Perubahan
 
 | Versi | Tanggal | Peru

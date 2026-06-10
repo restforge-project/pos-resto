@@ -12,23 +12,23 @@
 | **PIC** | Project Lead |
 | **Status** | Draft |
 
-> **Struktur dokumen:** PRD ini dipecah per modul untuk menjaga tiap berkas tetap ringkas dan mudah di-review. **File induk ini** memuat bagian bersama (pendahuluan, konvensi ID artefak, Non-Functional Requirement lintas modul, dan indeks modul). **Detail kebutuhan tiap modul** berada pada berkas terpisah `M-NNN-<nama-modul>.md` yang ditautkan pada Bagian 2.
+> **Struktur dokumen:** PRD ini dipecah per modul untuk menjaga tiap berkas tetap ringkas dan mudah ditinjau. **File induk ini** memuat bagian bersama (pendahuluan, konvensi ID artefak, Non-Functional Requirement lintas modul, dan indeks modul). **Detail kebutuhan tiap modul** berada pada berkas terpisah `M-NNN-<nama-modul>.md` yang ditautkan pada Bagian 2.
 
 ---
 
-## 1. Pendahuluan (Introduction)
+## 1. Pendahuluan
 
 Dokumen ini adalah **rujukan tunggal** untuk kebutuhan fungsional dan non-fungsional produk POS Rumah Makan. Dokumen menerjemahkan visi dan ruang lingkup pada [01-project-charter.md](../01-project-charter/01-project-charter.md) menjadi kebutuhan yang dapat dirancang, dibangun, dan diuji. Dokumen ini menjadi rujukan utama bagi Technical Specification (04), Database Design (05), API Specification (06), Traceability Matrix (07), dan Test Plan (09).
 
-### 1.1 Tujuan Dokumen (Purpose)
+### 1.1 Tujuan Dokumen
 
 Mendefinisikan **apa** yang harus dilakukan sistem (bukan **bagaimana** membangunnya), dalam bentuk User Story dan Functional Requirement yang tertelusur, sehingga setiap kebutuhan dapat diverifikasi melalui kriteria penerimaan (acceptance criteria).
 
-### 1.2 Cakupan Dokumen (Scope)
+### 1.2 Cakupan Dokumen
 
-Dokumen menjabarkan kebutuhan untuk 12 modul (M-001 s.d. M-012) sesuai [00-document-index.md](../00-document-index/00-document-index.md). Penulisan dilakukan bertahap per modul; setiap modul didokumentasikan pada berkasnya sendiri dan didaftarkan pada indeks Bagian 2.
+Dokumen menjabarkan kebutuhan untuk 12 modul (M-001 s.d. M-012) sesuai [00-document-index.md](../00-document-index/00-document-index.md). Penulisan dilakukan secara bertahap per modul; setiap modul didokumentasikan pada berkasnya sendiri dan didaftarkan pada indeks Bagian 2.
 
-### 1.3 Konvensi & ID Artefak (Conventions)
+### 1.3 Konvensi & ID Artefak
 
 Mengikuti konvensi pada [00-document-index.md](../00-document-index/00-document-index.md):
 
@@ -46,7 +46,7 @@ Prioritas memakai skala: **Must Have**, **Should Have**, **Could Have**.
 
 ---
 
-## 2. Indeks Modul (Module Index)
+## 2. Indeks Modul
 
 Setiap modul memiliki berkas PRD tersendiri. Detail User Story, Functional Requirement, Business Rule, dan Acceptance Criteria berada di berkas masing-masing.
 
@@ -84,7 +84,7 @@ NFR berlaku **lintas modul** dan menjadi acuan kualitas bagi seluruh berkas modu
 
 ---
 
-## Riwayat Perubahan (Changelog)
+## Riwayat Perubahan
 
 | Versi | Tanggal | Perubahan | PIC |
 |-------|---------|-----------|-----|

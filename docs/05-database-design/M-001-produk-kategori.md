@@ -20,7 +20,7 @@
 
 ---
 
-## 1. Ruang Lingkup (Scope)
+## 1. Ruang Lingkup
 
 Modul M-001 memerlukan lima tabel: satu untuk kategori produk, satu untuk produk (item yang dijual), satu untuk varian, dan dua untuk modifier (grup + opsi). Tabel-tabel ini menjadi katalog yang dikonsumsi modul Order (M-002), Pembayaran (M-005), dan Inventori (M-006).
 
@@ -43,7 +43,7 @@ Modul M-001 memerlukan lima tabel: satu untuk kategori produk, satu untuk produk
   product_modifier_group 1—∞ product_modifier_option : satu grup berisi banyak opsi (FR-012)
 ```
 
-## 3. Daftar Tabel (Table Summary)
+## 3. Daftar Tabel
 
 | Tabel | Deskripsi | Relasi | Sumber |
 |-------|-----------|--------|--------|
@@ -208,7 +208,7 @@ module.exports = ({ defineModel }) => defineModel('product_variant', {
 });
 ```
 
-**Catatan:** `group_name` (mis. "Ukuran") + `option_name` (mis. "Besar") dengan `price_adjustment` (FR-011). Composite unique mencegah opsi varian ganda pada produk yang sama. FK `onDelete: cascade` — varian ikut terhapus bila produk dihapus. `price_adjustment >= 0` (BR-004).
+**Catatan:** `group_name` (mis. "Ukuran") + `option_name` (mis. "Besar") dengan `price_adjustment` (FR-011). Composite unique mencegah opsi varian ganda pada produk yang sama. FK `onDelete: cascade`, yaitu varian ikut terhapus bila produk dihapus. `price_adjustment >= 0` (BR-004).
 
 **Contoh data:**
 
@@ -345,7 +345,7 @@ module.exports = ({ defineModel }) => defineModel('product_modifier_option', {
 
 ---
 
-## 5. Penegakan di Layer Lain (Enforcement Beyond Schema)
+## 5. Penegakan di Layer Lain
 
 Sebagian aturan bisnis tidak dapat dinyatakan murni di SDF dan ditegakkan di layer RDF/aplikasi:
 

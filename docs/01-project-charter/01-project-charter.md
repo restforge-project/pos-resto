@@ -14,15 +14,15 @@
 
 ---
 
-## 1. Latar Belakang (Background)
+## 1. Latar Belakang
 
-Banyak rumah makan dan restoran kecil–menengah masih mencatat pesanan secara manual atau memakai aplikasi kasir yang terlalu mahal dan rumit untuk kebutuhan mereka. Akibatnya sering terjadi salah catat order, antrian dapur tidak teratur, stok bahan baku sulit dipantau, dan laporan penjualan tidak rapi.
+Banyak rumah makan dan restoran kecil hingga menengah masih mencatat pesanan secara manual atau memakai aplikasi kasir yang terlalu mahal dan rumit untuk kebutuhan mereka. Akibatnya sering terjadi salah catat order, antrian dapur tidak teratur, stok bahan baku sulit dipantau, dan laporan penjualan tidak rapi.
 
 POS Rumah Makan dibangun sebagai produk perangkat lunak (SaaS) yang dapat dijual ke banyak rumah makan. Fokusnya adalah alur kasir yang cepat dan sederhana, andal saat koneksi internet tidak stabil (offline-first), dengan harga dan kompleksitas yang sesuai untuk usaha kuliner skala kecil hingga menengah.
 
 ---
 
-## 2. Tujuan Proyek (Project Objectives)
+## 2. Tujuan Proyek
 
 Tujuan dirumuskan secara ringkas dan terukur:
 
@@ -37,9 +37,9 @@ Tujuan dirumuskan secara ringkas dan terukur:
 
 ---
 
-## 3. Ruang Lingkup (Scope)
+## 3. Ruang Lingkup
 
-### 3.1 Termasuk dalam Lingkup (In Scope)
+### 3.1 Termasuk dalam Lingkup
 
 MVP berfokus pada alur kasir inti, kemudian diperluas bertahap. Modul mengacu pada [00-document-index.md](../00-document-index/00-document-index.md):
 
@@ -61,7 +61,7 @@ MVP berfokus pada alur kasir inti, kemudian diperluas bertahap. Modul mengacu pa
 - M-011 Pengaturan & Multi-Outlet
 - M-012 Integrasi & Sinkronisasi Offline
 
-### 3.2 Di Luar Lingkup (Out of Scope)
+### 3.2 Di Luar Lingkup
 
 Untuk menjaga proyek tetap fokus, hal berikut tidak dikerjakan pada tahap awal:
 
@@ -73,7 +73,7 @@ Untuk menjaga proyek tetap fokus, hal berikut tidak dikerjakan pada tahap awal:
 
 ---
 
-## 4. Pemangku Kepentingan (Stakeholders)
+## 4. Pemangku Kepentingan
 
 | Peran | Tanggung Jawab |
 |-------|----------------|
@@ -88,7 +88,7 @@ Untuk menjaga proyek tetap fokus, hal berikut tidak dikerjakan pada tahap awal:
 
 ---
 
-## 5. Tahapan & Target Waktu (Milestones)
+## 5. Tahapan & Target Waktu
 
 Penjadwalan dibuat sederhana berbasis target MVP. Detail urutan modul akan dirinci di [02-product-roadmap.md](../02-product-roadmap.md).
 
@@ -101,7 +101,7 @@ Penjadwalan dibuat sederhana berbasis target MVP. Detail urutan modul akan dirin
 
 ---
 
-## 6. Asumsi & Batasan (Assumptions & Constraints)
+## 6. Asumsi & Batasan
 
 **Asumsi:**
 
@@ -116,7 +116,7 @@ Penjadwalan dibuat sederhana berbasis target MVP. Detail urutan modul akan dirin
 
 ---
 
-## 7. Risiko Utama (Key Risks)
+## 7. Risiko Utama
 
 | Risiko | Dampak | Penanganan |
 |--------|--------|------------|
@@ -126,7 +126,7 @@ Penjadwalan dibuat sederhana berbasis target MVP. Detail urutan modul akan dirin
 
 ---
 
-## 8. Kriteria Sukses (Success Criteria)
+## 8. Kriteria Sukses
 
 Proyek dianggap berhasil pada tahap awal apabila:
 
@@ -137,7 +137,7 @@ Proyek dianggap berhasil pada tahap awal apabila:
 
 ---
 
-## Riwayat Perubahan (Changelog)
+## Riwayat Perubahan
 
 | Versi | Tanggal | Perubahan | PIC |
 |-------|---------|-----------|-----|
@@ -146,4 +146,4 @@ Proyek dianggap berhasil pada tahap awal apabila:
 
 ---
 
-*Dokumen ini adalah source of truth untuk visi, tujuan, dan ruang lingkup proyek POS Rumah Makan. Perubahan lingkup harus melalui persetujuan Project Lead dan dicatat pada changelog.*
+*Dokumen ini adalah rujukan tunggal untuk visi, tujuan, dan ruang lingkup proyek POS Rumah Makan. Perubahan lingkup harus melalui persetujuan Project Lead dan dicatat pada changelog.*

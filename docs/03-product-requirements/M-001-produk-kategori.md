@@ -18,7 +18,7 @@
 
 ---
 
-## 1. Ringkasan Modul (Module Overview)
+## 1. Ringkasan Modul
 
 Modul Manajemen Produk & Kategori adalah fondasi data produk bagi seluruh alur transaksi POS. Modul ini mengelola katalog item yang dijual rumah makan: daftar produk, pengelompokan ke dalam kategori, penetapan harga, serta varian dan modifier (misalnya level pedas, pilihan topping, ukuran porsi). Data yang dikelola di sini menjadi sumber bagi modul Order (M-002), Pembayaran (M-005), dan Inventori (M-006), sehingga akurasi dan kerapian data produk sangat menentukan kelancaran operasional.
 
@@ -31,11 +31,11 @@ Modul Manajemen Produk & Kategori adalah fondasi data produk bagi seluruh alur t
 | **Tujuan Bisnis** | Menyediakan katalog produk yang akurat, terstruktur, dan mudah diperbarui sebagai dasar seluruh transaksi |
 | **Modul Terkait** | M-002 (Order) menggunakan katalog; M-005 (Pembayaran) memakai harga; M-006 (Inventori) menautkan resep/BOM ke produk; M-007 (Promo) merujuk item & kategori |
 
-**Cakupan modul (in scope):**
+**Cakupan modul:**
 
 Pengelolaan kategori produk (buat, ubah, urutkan, aktif/nonaktif); pengelolaan item produk beserta harga, deskripsi, dan foto; pengelolaan varian (mis. ukuran) dan modifier (mis. topping, level pedas) beserta penyesuaian harganya; serta status ketersediaan produk (tersedia/habis).
 
-**Di luar cakupan modul (out of scope):**
+**Di luar cakupan modul:**
 
 Pengurangan stok bahan baku otomatis dan definisi resep/BOM dikelola pada M-006 Manajemen Inventori. Aturan diskon dan promo dikelola pada M-007. Modul M-001 hanya menyediakan referensi item & kategori yang dipakai modul-modul tersebut.
 
@@ -104,7 +104,7 @@ Functional Requirement menyatakan kemampuan konkret yang harus disediakan sistem
 | FR-015 | Sistem harus menyediakan **pencarian item** berdasarkan nama (pencocokan sebagian, tidak peka huruf besar/kecil) dan **filter berdasarkan kategori**. | US-011 | Must Have |
 | FR-016 | Sistem harus menampilkan **hanya item dan kategori yang aktif dan tersedia** beserta varian/modifier terkait kepada kasir/pelayan saat membuat order. | US-012 | Must Have |
 
-> **Catatan:** Non-Functional Requirement (NFR) yang berlaku lintas modul — performa pencarian, ketahanan offline, validasi data — dirangkum pada file induk [03-product-requirements.md](README.md) dan dirujuk dari [04-technical-specification.md](../04-technical-specification/README.md).
+> **Catatan:** Non-Functional Requirement (NFR) yang berlaku lintas modul (performa pencarian, ketahanan offline, validasi data) dirangkum pada file induk [03-product-requirements.md](README.md) dan dirujuk dari [04-technical-specification.md](../04-technical-specification/README.md).
 
 ---
 
@@ -172,7 +172,7 @@ Acceptance Criteria menetapkan kondisi yang harus terpenuhi agar sebuah kebutuha
 
 ---
 
-## Riwayat Perubahan (Changelog)
+## Riwayat Perubahan
 
 | Versi | Tanggal | Perubahan | PIC |
 |-------|---------|-----------|-----|

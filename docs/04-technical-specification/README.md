@@ -17,15 +17,15 @@
 
 ---
 
-## 1. Pendahuluan (Introduction)
+## 1. Pendahuluan
 
-### 1.1 Tujuan Dokumen (Purpose)
+### 1.1 Tujuan Dokumen
 
 Dokumen ini adalah **rujukan tunggal** untuk arsitektur sistem dan *technology stack* POS Rumah Makan. Dokumen menerjemahkan kebutuhan pada [03-product-requirements](../03-product-requirements/README.md) menjadi keputusan teknis: bagaimana sistem disusun, teknologi apa yang dipakai, bagaimana komponen saling berkomunikasi, serta bagaimana aspek keamanan, keandalan, dan deployment dipenuhi. Dokumen ini menjadi acuan bagi Database Design (05), API Specification (06), Feature Specification (08), dan Deployment Guide (10).
 
-Dokumen ini menjelaskan **bagaimana** sistem dibangun pada level arsitektur — bukan kebutuhan bisnisnya (lihat 03) dan bukan detail skema tabel (lihat 05) atau kontrak endpoint (lihat 06).
+Dokumen ini menjelaskan **bagaimana** sistem dibangun pada level arsitektur, bukan kebutuhan bisnisnya (lihat 03) dan bukan detail skema tabel (lihat 05) atau kontrak endpoint (lihat 06).
 
-### 1.2 Ruang Lingkup (Scope)
+### 1.2 Ruang Lingkup
 
 Lingkup dokumen mencakup arsitektur untuk **MVP** POS Rumah Makan dengan batasan yang telah disepakati:
 
@@ -35,7 +35,7 @@ Lingkup dokumen mencakup arsitektur untuk **MVP** POS Rumah Makan dengan batasan
 
 Hal yang **berada di luar** dokumen ini: skema tabel rinci (05), kontrak request/response per endpoint (06), prosedur deployment langkah demi langkah (10), dan rencana pengujian (09).
 
-### 1.3 Acuan & Dependensi (References & Constraints)
+### 1.3 Acuan & Dependensi
 
 Arsitektur ini terikat pada dua referensi teknologi yang telah ditetapkan sebagai **batasan tetap (hard constraint)**:
 
@@ -53,13 +53,13 @@ Dokumen rujukan terkait:
 | [05-database-design](../05-database-design/README.md) | Konsumen: skema tabel diturunkan dari arsitektur data di sini |
 | [06-api-specification](../06-api-specification.md) | Konsumen: kontrak endpoint mengikuti pola RESTForge yang dijelaskan di sini |
 
-### 1.4 Pembaca yang Dituju (Intended Audience)
+### 1.4 Pembaca yang Dituju
 
 Technical Lead/Architect (pemilik dokumen), Developer backend & frontend (acuan implementasi), QA Engineer (memahami batas sistem), dan DevOps (acuan infrastruktur & deployment).
 
 ---
 
-## 2. Daftar Bagian (Document Index)
+## 2. Daftar Bagian
 
 Isi teknis dipecah per tema pada berkas berikut. Penomoran Bagian (1–10) tetap berurutan lintas berkas.
 
@@ -74,7 +74,7 @@ Isi teknis dipecah per tema pada berkas berikut. Penomoran Bagian (1–10) tetap
 
 ---
 
-## Riwayat Perubahan (Changelog)
+## Riwayat Perubahan
 
 | Versi | Tanggal | Perubahan | PIC |
 |-------|---------|-----------|-----|

@@ -5,6 +5,6 @@
 
 ---
 
-## 5. Autentikasi & Otorisasi (Authentication & Authorization)
+## 5. Autentikasi & Otorisasi
 
-> **Status: belum ditulis.** Akan memuat: Auth service bawaan RESTForge (`app_code`, endpoint `session/login`/`refresh`/`logout`), penerbitan **JWT access + refresh token**, pola `AuthClient` di frontend (penyimpanan token, auto-refresh saat 401, idle-timeout), serta **otorisasi berbasis role & permission** (route guard `requireLogin`/`requirePermission`, gating tombol per `*_CREATE/READ/UPDATE/DELETE`).
+> **Status: belum ditulis.** Akan memuat: Auth service bawaan RESTForge (`app_code`, endpoint `session/login`/`refresh`/`logout`), penerbitan **JWT access + refresh token**, pola `AuthClient` di frontend (penyimpanan token, auto-refresh saat 401, idle-timeout), serta **otorisasi berbasis role & permission** (route guard `requireLogin`/`requirePermission`, pembatasan tombol per `*_CREATE/READ/UPDATE/DELETE`).

@@ -10,3 +10,7 @@ node_modules/
 
 # Environment / kredensial
 **/config/*.env
+
+# Artefak review bahasa (doc-review)
+*.report.md
+_checklist.md

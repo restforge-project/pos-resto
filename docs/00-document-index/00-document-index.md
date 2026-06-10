@@ -1,4 +1,4 @@
-# INDEKS DOKUMEN (DOCUMENT INDEX)
+# INDEKS DOKUMEN
 ## POS Rumah Makan — Point of Sale System untuk Restoran
 
 ---
@@ -14,19 +14,19 @@
 
 ---
 
-## 1. Deskripsi Project (Project Description)
+## 1. Deskripsi Project
 
-POS Rumah Makan adalah sistem Point of Sale terintegrasi untuk operasional restoran, rumah makan, dan warung makan. Sistem ini menangani seluruh alur layanan — dari pemesanan di meja maupun kasir, pengiriman order ke dapur, pembayaran multi-metode, hingga pencatatan stok bahan baku dan pelaporan penjualan. Platform dirancang untuk mendukung operasi harian yang cepat dan andal, baik saat online maupun offline (offline-first), serta dapat berjalan pada perangkat kasir, tablet pelayan, dan layar dapur (Kitchen Display).
+POS Rumah Makan adalah sistem Point of Sale terintegrasi untuk operasional restoran, rumah makan, dan warung makan. Sistem ini menangani seluruh alur layanan, mulai dari pemesanan di meja maupun kasir, pengiriman order ke dapur, pembayaran multi-metode, hingga pencatatan stok bahan baku dan pelaporan penjualan. Platform dirancang untuk mendukung operasi harian yang cepat dan andal, baik saat online maupun offline (offline-first), serta dapat berjalan pada perangkat kasir, tablet pelayan, dan layar dapur (Kitchen Display).
 
 Pembangunan dilakukan secara bertahap dalam beberapa fase dengan total 12 modul, sehingga setiap fase menghasilkan produk yang dapat langsung digunakan (MVP). Fase awal berfokus pada alur kasir inti (produk, order, pembayaran), kemudian diperluas dengan manajemen meja, dapur, inventori bahan baku, hingga loyalitas pelanggan dan analitik penjualan.
 
 ---
 
-## 2. Daftar Dokumen (Document Registry)
+## 2. Daftar Dokumen
 
 Seluruh dokumen project disusun mengikuti tahapan SDLC (Software Development Life Cycle). Penomoran dokumen mencerminkan urutan fase pengembangan.
 
-### 2.1 Fase Perencanaan (Planning Phase)
+### 2.1 Fase Perencanaan
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
@@ -34,7 +34,7 @@ Seluruh dokumen project disusun mengikuti tahapan SDLC (Software Development Lif
 | 01 | [01-project-charter.md](../01-project-charter/01-project-charter.md) | Project Charter | 1.0 | ✓ Draft | Project Lead |
 | 02 | [02-product-roadmap.md](../02-product-roadmap.md) | Product Roadmap | — | ☐ Belum Dibuat | [PIC] |
 
-### 2.2 Fase Analisis Kebutuhan (Requirements Phase)
+### 2.2 Fase Analisis Kebutuhan
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
@@ -42,7 +42,7 @@ Seluruh dokumen project disusun mengikuti tahapan SDLC (Software Development Lif
 
 > **Catatan PRD:** Dokumen 03 berupa **folder** `03-product-requirements/` dengan `README.md` sebagai induk (pendahuluan, konvensi ID, NFR, indeks modul). **Skema tiap modul** ada pada berkas terpisah `03-product-requirements/M-NNN-<nama-modul>.md`. Modul M-001 sudah selesai; M-002 s.d. M-012 menyusul.
 
-### 2.3 Fase Perancangan (Design Phase)
+### 2.3 Fase Perancangan
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
@@ -53,7 +53,7 @@ Seluruh dokumen project disusun mengikuti tahapan SDLC (Software Development Lif
 
 > **Catatan Database Design:** Dokumen 05 berupa **folder** `05-database-design/` dengan `README.md` sebagai index (konvensi, kolom audit, tipe data, daftar modul). Skema tiap modul ada pada berkas terpisah `M-NNN-<nama-modul>.md` di dalam folder tersebut.
 
-### 2.4 Fase Implementasi (Implementation Phase)
+### 2.4 Fase Implementasi
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
@@ -61,20 +61,20 @@ Seluruh dokumen project disusun mengikuti tahapan SDLC (Software Development Lif
 
 > **Catatan:** File feature specification dapat dipecah per modul atau fitur kompleks, misalnya: `08-feature-order-management.md`, `08-feature-payment.md`, `08-feature-kitchen-display.md`, dsb.
 
-### 2.5 Fase Pengujian dan Penyebaran (Testing & Deployment Phase)
+### 2.5 Fase Pengujian dan Penyebaran
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
 | 09 | [09-test-plan.md](../09-test-plan.md) | Test Plan | — | ☐ Belum Dibuat | [PIC] |
 | 10 | [10-deployment-guide.md](../10-deployment-guide.md) | Deployment Guide | — | ☐ Belum Dibuat | [PIC] |
 
-### 2.6 Referensi (Reference)
+### 2.6 Referensi
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
 | 11 | [11-glossary.md](../11-glossary.md) | Glossary & Data Dictionary | — | ☐ Belum Dibuat | [PIC] |
 
-### 2.7 Ringkasan Status (Status Summary)
+### 2.7 Ringkasan Status
 
 | Status | Jumlah |
 |--------|--------|
@@ -86,11 +86,11 @@ Seluruh dokumen project disusun mengikuti tahapan SDLC (Software Development Lif
 
 ---
 
-## 3. Peta Hubungan Antar Dokumen (Document Relationship Map)
+## 3. Peta Hubungan Antar Dokumen
 
 Diagram berikut menunjukkan hubungan ketergantungan (dependency) dan aliran informasi antar dokumen. Setiap dokumen berfungsi sebagai rujukan tunggal untuk domain spesifik yang dicakupnya.
 
-### 3.1 Diagram Dependensi (Dependency Diagram)
+### 3.1 Diagram Dependensi
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -145,11 +145,11 @@ Diagram berikut menunjukkan hubungan ketergantungan (dependency) dan aliran info
         └────────────────────────────────────┘
 ```
 
-### 3.2 Tabel Source of Truth
+### 3.2 Tabel Rujukan Tunggal
 
 Setiap domain informasi memiliki satu dokumen otoritatif sebagai rujukan tunggal. Jika terjadi konflik informasi antar dokumen, dokumen rujukan tunggal yang berlaku.
 
-| Domain Informasi | Source of Truth | Dokumen Konsumen |
+| Domain Informasi | Rujukan Tunggal | Dokumen Konsumen |
 |------------------|-----------------|-------------------|
 | Visi, misi, dan lingkup project | [01-project-charter.md](../01-project-charter/01-project-charter.md) | Seluruh dokumen |
 | Strategi pembangunan bertahap (phasing) | [02-product-roadmap.md](../02-product-roadmap.md) | 01, 03, 04, 08 |
@@ -165,7 +165,7 @@ Setiap domain informasi memiliki satu dokumen otoritatif sebagai rujukan tunggal
 
 ---
 
-## 4. Daftar Modul (Module Registry)
+## 4. Daftar Modul
 
 Sistem POS Rumah Makan terdiri dari 12 modul yang dibangun secara bertahap. Detail cakupan dan urutan pembangunan diatur dalam [02-product-roadmap.md](../02-product-roadmap.md).
 
@@ -186,7 +186,7 @@ Sistem POS Rumah Makan terdiri dari 12 modul yang dibangun secara bertahap. Deta
 
 ---
 
-## 5. Panduan Pembacaan Dokumen (Reading Guide)
+## 5. Panduan Pembacaan Dokumen
 
 Urutan pembacaan dokumen disesuaikan dengan peran dan kebutuhan pembaca. Berikut adalah jalur baca yang disarankan berdasarkan peran.
 
@@ -257,7 +257,7 @@ Pembacaan wajib yang berlaku untuk semua peran sebelum menelusuri dokumen spesif
 
 ---
 
-## 6. Konvensi Penulisan Dokumen (Writing Conventions)
+## 6. Konvensi Penulisan Dokumen
 
 Seluruh dokumen dalam project ini mengikuti konvensi berikut:
 
@@ -278,7 +278,7 @@ Seluruh dokumen dalam project ini mengikuti konvensi berikut:
 
 ---
 
-## Riwayat Perubahan (Changelog)
+## Riwayat Perubahan
 
 | Versi | Tanggal | Perubahan | PIC |
 |-------|---------|-----------|-----|

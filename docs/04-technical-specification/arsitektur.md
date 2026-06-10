@@ -5,17 +5,17 @@
 
 ---
 
-## 2. Ikhtisar Arsitektur (Architecture Overview)
+## 2. Ikhtisar Arsitektur
 
-### 2.1 Gaya Arsitektur (Architecture Style)
+### 2.1 Gaya Arsitektur
 
-Sistem memakai arsitektur **client–server tiga lapis (3-tier)** dengan backend *definition-first*. Frontend adalah aplikasi web **multi-page** statis (HTML + Bootstrap 5 + jQuery) yang berperan sebagai *thin client* — seluruh logika data, validasi, dan persistensi berada di backend. Backend dihasilkan oleh **RESTForge** sebagai HTTP API bergaya **action-based** (`POST /api/{project}/{resource}/{action}`), berkomunikasi dengan frontend melalui JSON. Penyimpanan data memakai **PostgreSQL**, dengan **Redis** sebagai lapisan state bersama untuk keandalan (cache, distributed lock, idempotency, rate limit).
+Sistem memakai arsitektur **client–server tiga lapis (3-tier)** dengan backend *definition-first*. Frontend adalah aplikasi web **multi-page** statis (HTML + Bootstrap 5 + jQuery) yang berperan sebagai *thin client*, yaitu seluruh logika data, validasi, dan persistensi berada di backend. Backend dihasilkan oleh **RESTForge** sebagai HTTP API bergaya **action-based** (`POST /api/{project}/{resource}/{action}`), berkomunikasi dengan frontend melalui JSON. Penyimpanan data memakai **PostgreSQL**, dengan **Redis** sebagai lapisan state bersama untuk keandalan (cache, distributed lock, idempotency, rate limit).
 
-Frontend dan data API berjalan sebagai **dua layanan terpisah** dan berkomunikasi **langsung lintas-origin**: frontend statis dilayani sebagai berkas (di development cukup static server seperti `npx serve`), sedangkan data API dilayani runtime RESTForge pada port tersendiri. Karena itu **CORS diaktifkan pada runtime**, dan setiap permintaan AJAX menyertakan header `Authorization: Bearer <JWT>` secara otomatis. Pendekatan baseline ini **tidak memerlukan reverse proxy** — sesuai use-case nyata RESTForge. Reverse proxy (nginx) bersifat **opsional dan diperuntukkan bagi produksi** (terminasi TLS, satu hostname/same-origin); pembahasannya ada di [Bagian 9 — Deployment](reliability-deployment.md), bukan komponen inti.
+Frontend dan data API berjalan sebagai **dua layanan terpisah** dan berkomunikasi **langsung lintas-origin**: frontend statis dilayani sebagai berkas (di development cukup static server seperti `npx serve`), sedangkan data API dilayani runtime RESTForge pada port tersendiri. Karena itu **CORS diaktifkan pada runtime**, dan setiap permintaan AJAX menyertakan header `Authorization: Bearer <JWT>` secara otomatis. Pendekatan baseline ini **tidak memerlukan reverse proxy**, sesuai use-case nyata RESTForge. Reverse proxy (nginx) bersifat **opsional dan diperuntukkan bagi produksi** (terminasi TLS, satu hostname/same-origin); pembahasannya ada di [Bagian 9 — Deployment](reliability-deployment.md), bukan komponen inti.
 
 Autentikasi memakai **Auth service bawaan RESTForge** (layanan terpisah, diidentifikasi `app_code`) yang menerbitkan **JWT access + refresh token** beserta data role & permission pengguna. Frontend mengonsumsinya lewat pola `AuthClient`. Detail pada [Bagian 5 — Autentikasi](autentikasi.md).
 
-### 2.2 Diagram Komponen (Component Diagram)
+### 2.2 Diagram Komponen
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
@@ -45,7 +45,7 @@ Autentikasi memakai **Auth service bawaan RESTForge** (layanan terpisah, diident
 
 > **Catatan:** UDF (UI Definition File) RESTForge **tidak dipakai** karena frontend memakai design template yang sudah ditentukan. Dari tiga format RESTForge, hanya **SDF** (skema) dan **RDF** (endpoint) yang digunakan. Live Sync (WebSocket+Redis) belum diaktifkan pada MVP; lihat [Bagian 8 — Reliability](reliability-deployment.md).
 
-### 2.3 Komponen Utama (Key Components)
+### 2.3 Komponen Utama
 
 | Komponen | Teknologi | Tanggung Jawab |
 |----------|-----------|----------------|
@@ -56,7 +56,7 @@ Autentikasi memakai **Auth service bawaan RESTForge** (layanan terpisah, diident
 | Database | PostgreSQL | Penyimpanan persisten data POS |
 | Reverse proxy *(opsional, produksi)* | nginx | Terminasi TLS, satu hostname/same-origin di depan frontend + API |
 
-### 2.4 Alur Request (Request Flow)
+### 2.4 Alur Request
 
 **Login (sekali di awal sesi):** Browser mengirim `POST {authBaseUrl}/session/login` berisi `{ app_code, username, password }`. Auth service mengembalikan **access token + refresh token (JWT)** beserta profil, role, dan permission; `AuthClient` menyimpannya di localStorage dan memasang idle-timeout.
 
@@ -66,12 +66,12 @@ Autentikasi memakai **Auth service bawaan RESTForge** (layanan terpisah, diident
 2. **RESTForge data runtime** memverifikasi JWT (dan permission, mis. `PRODUCT_CATEGORY_CREATE`), lalu memvalidasi payload sesuai aturan RDF.
 3. Bila valid, runtime menjalankan `INSERT` ke **PostgreSQL**; **Redis** dipakai untuk *distributed lock*/idempotency bila relevan (mis. mencegah duplikasi akibat klik ganda).
 4. Runtime mengembalikan **envelope response** JSON (`success`, `message`, `data`, `timestamp`) dengan kode status semantik — `201` sukses, `400` validasi gagal, `409` nama kategori duplikat (lihat Bagian 4 di bawah).
-5. Bila runtime membalas `401` (token kedaluwarsa), `AuthClient` otomatis me-`refresh` token lalu mengulang permintaan; jika gagal, pengguna diarahkan ke halaman login.
+5. Bila runtime membalas `401` (token kedaluwarsa), `AuthClient` otomatis memperbarui token lalu mengulang permintaan; jika gagal, pengguna diarahkan ke halaman login.
 6. Frontend membaca envelope dan memperbarui tampilan (mis. menampilkan baris kategori baru atau pesan error per field).
 
-### 2.5 Prinsip Arsitektur (Architecture Principles)
+### 2.5 Prinsip Arsitektur
 
-Arsitektur berpegang pada beberapa prinsip yang memandu keputusan di bagian-bagian berikutnya: **definition-first** — perubahan skema dan endpoint diawali dari berkas definisi (SDF/RDF) demi konsistensi dan portabilitas; **runtime stateless** — state lintas-request ditaruh di Redis/PostgreSQL agar runtime dapat diskalakan dan di-restart tanpa kehilangan konteks; **rujukan tunggal per lapisan** — skema adalah otoritas struktur data (05), RDF adalah otoritas kontrak endpoint (06); **manfaatkan kapabilitas bawaan** — autentikasi, validasi, dan reliability memakai mekanisme RESTForge daripada membangun ulang; serta **kesederhanaan baseline** — tanpa reverse proxy saat development, dengan proxy diperkenalkan hanya bila produksi membutuhkannya.
+Arsitektur berpegang pada beberapa prinsip yang memandu keputusan di bagian-bagian berikutnya: **definition-first**: perubahan skema dan endpoint diawali dari berkas definisi (SDF/RDF) demi konsistensi dan portabilitas; **runtime stateless**: state lintas-request ditaruh di Redis/PostgreSQL agar runtime dapat diskalakan dan dimulai ulang tanpa kehilangan konteks; **rujukan tunggal per lapisan**: skema adalah otoritas struktur data (05), RDF adalah otoritas kontrak endpoint (06); **manfaatkan kapabilitas bawaan**: autentikasi, validasi, dan reliability memakai mekanisme RESTForge daripada membangun ulang; serta **kesederhanaan baseline**: tanpa reverse proxy saat development, dengan proxy diperkenalkan hanya bila produksi membutuhkannya.
 
 ---
 
@@ -79,7 +79,7 @@ Arsitektur berpegang pada beberapa prinsip yang memandu keputusan di bagian-bagi
 
 Bagian ini menetapkan teknologi yang dipakai di setiap lapisan beserta alasannya. Komponen yang ditandai **wajib** berasal dari batasan tetap (lihat Bagian 1.3 pada [README](README.md)); komponen lain dipilih agar selaras dengan batasan tersebut.
 
-### 3.1 Ringkasan Stack (Stack Summary)
+### 3.1 Ringkasan Stack
 
 | Lapisan | Teknologi | Versi (acuan) | Status |
 |---------|-----------|---------------|--------|
@@ -117,9 +117,9 @@ Halaman yang relevan untuk **M-001** sudah tersedia di template: `categories.htm
 
 **PostgreSQL** dipilih sebagai database karena dukungan constraint dan tipe data yang lengkap (unique, foreign key, check, JSON), cocok untuk integritas data POS dan didukung penuh RESTForge. Untuk pilot single-tenant dipakai **satu database**.
 
-**Redis** dipakai sebagai lapisan state bersama yang menopang primitif keandalan RESTForge — cache, *distributed lock*, idempotency, dan rate limit (lihat [Bagian 8 — Reliability](reliability-deployment.md)). Redis disertakan sejak MVP sesuai keputusan arsitektur.
+**Redis** dipakai sebagai lapisan state bersama yang menopang primitif keandalan RESTForge, yaitu cache, *distributed lock*, idempotency, dan rate limit (lihat [Bagian 8 — Reliability](reliability-deployment.md)). Redis disertakan sejak MVP sesuai keputusan arsitektur.
 
-### 3.5 Perkakas & Lingkungan Pengembangan (Tooling)
+### 3.5 Perkakas & Lingkungan Pengembangan
 
 | Perkakas | Fungsi |
 |----------|--------|
@@ -137,7 +137,7 @@ Halaman yang relevan untuk **M-001** sudah tersedia di template: `categories.htm
 
 Backend POS Rumah Makan **mengadopsi arsitektur RESTForge apa adanya**. Dokumen ini **tidak menulis ulang** arsitektur tersebut; arsitektur resmi sudah dipelihara pada dokumentasi RESTForge Systems dan menjadi **rujukan tunggal**. Bila terjadi perbedaan, dokumentasi RESTForge yang berlaku.
 
-### 4.1 Dokumen Arsitektur Rujukan (by name)
+### 4.1 Dokumen Arsitektur Rujukan (berdasarkan nama)
 
 | Dokumen Arsitektur RESTForge | Cakupan |
 |------------------------------|---------|
@@ -147,7 +147,7 @@ Backend POS Rumah Makan **mengadopsi arsitektur RESTForge apa adanya**. Dokumen 
 | RESTForge Brand Philosophy | Prinsip *schema-driven* platform |
 | Diagram Tiga Pilar | Relasi tiga format definisi (SDF · RDF · UDF) |
 
-### 4.2 Elemen Arsitektur yang Diadopsi (by name)
+### 4.2 Elemen Arsitektur yang Diadopsi (berdasarkan nama)
 
 Proyek ini memakai elemen arsitektur RESTForge berikut, sesuai definisi pada handbook (dirujuk berdasarkan nama, tidak disalin):
 
