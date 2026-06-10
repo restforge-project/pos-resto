@@ -31,14 +31,14 @@ Seluruh dokumen project disusun mengikuti tahapan SDLC (Software Development Lif
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
 | 00 | [00-document-index.md](00-document-index.md) | Indeks Dokumen (Document Index) | 1.2 | ✓ Draft | Project Lead |
-| 01 | [01-project-charter.md](01-project-charter.md) | Project Charter | 1.0 | ✓ Draft | Project Lead |
-| 02 | [02-product-roadmap.md](02-product-roadmap.md) | Product Roadmap | — | ☐ Belum Dibuat | [PIC] |
+| 01 | [01-project-charter.md](../01-project-charter/01-project-charter.md) | Project Charter | 1.0 | ✓ Draft | Project Lead |
+| 02 | [02-product-roadmap.md](../02-product-roadmap.md) | Product Roadmap | — | ☐ Belum Dibuat | [PIC] |
 
 ### 2.2 Fase Analisis Kebutuhan (Requirements Phase)
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
-| 03 | [03-product-requirements/](03-product-requirements/README.md) | Product Requirements Document (folder) | 1.0 | ✓ Draft | Project Lead |
+| 03 | [03-product-requirements/](../03-product-requirements/README.md) | Product Requirements Document (folder) | 1.0 | ✓ Draft | Project Lead |
 
 > **Catatan PRD:** Dokumen 03 berupa **folder** `03-product-requirements/` dengan `README.md` sebagai induk (pendahuluan, konvensi ID, NFR, indeks modul). **Skema tiap modul** ada pada berkas terpisah `03-product-requirements/M-NNN-<nama-modul>.md`. Modul M-001 sudah selesai; M-002 s.d. M-012 menyusul.
 
@@ -46,10 +46,10 @@ Seluruh dokumen project disusun mengikuti tahapan SDLC (Software Development Lif
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
-| 04 | [04-technical-specification/](04-technical-specification/README.md) | Technical Specification (folder) | 0.6 | ✓ Draft (sebagian) | Project Lead |
-| 05 | [05-database-design/](05-database-design/README.md) | Database Design (folder) | 0.1 | ✓ Draft | Project Lead |
-| 06 | [06-api-specification.md](06-api-specification.md) | API Specification | — | ☐ Belum Dibuat | [PIC] |
-| 07 | [07-traceability-matrix.md](07-traceability-matrix.md) | Traceability Matrix | — | ☐ Belum Dibuat | [PIC] |
+| 04 | [04-technical-specification/](../04-technical-specification/README.md) | Technical Specification (folder) | 0.6 | ✓ Draft (sebagian) | Project Lead |
+| 05 | [05-database-design/](../05-database-design/README.md) | Database Design (folder) | 0.1 | ✓ Draft | Project Lead |
+| 06 | [06-api-specification.md](../06-api-specification.md) | API Specification | — | ☐ Belum Dibuat | [PIC] |
+| 07 | [07-traceability-matrix.md](../07-traceability-matrix.md) | Traceability Matrix | — | ☐ Belum Dibuat | [PIC] |
 
 > **Catatan Database Design:** Dokumen 05 berupa **folder** `05-database-design/` dengan `README.md` sebagai index (konvensi, kolom audit, tipe data, daftar modul). Skema tiap modul ada pada berkas terpisah `M-NNN-<nama-modul>.md` di dalam folder tersebut.
 
@@ -57,7 +57,7 @@ Seluruh dokumen project disusun mengikuti tahapan SDLC (Software Development Lif
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
-| 08 | [08-feature-specification.md](08-feature-specification.md) | Feature Specification | — | ☐ Belum Dibuat | [PIC] |
+| 08 | [08-feature-specification.md](../08-feature-specification.md) | Feature Specification | — | ☐ Belum Dibuat | [PIC] |
 
 > **Catatan:** File feature specification dapat dipecah per modul atau fitur kompleks, misalnya: `08-feature-order-management.md`, `08-feature-payment.md`, `08-feature-kitchen-display.md`, dsb.
 
@@ -65,14 +65,14 @@ Seluruh dokumen project disusun mengikuti tahapan SDLC (Software Development Lif
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
-| 09 | [09-test-plan.md](09-test-plan.md) | Test Plan | — | ☐ Belum Dibuat | [PIC] |
-| 10 | [10-deployment-guide.md](10-deployment-guide.md) | Deployment Guide | — | ☐ Belum Dibuat | [PIC] |
+| 09 | [09-test-plan.md](../09-test-plan.md) | Test Plan | — | ☐ Belum Dibuat | [PIC] |
+| 10 | [10-deployment-guide.md](../10-deployment-guide.md) | Deployment Guide | — | ☐ Belum Dibuat | [PIC] |
 
 ### 2.6 Referensi (Reference)
 
 | No | File | Judul | Versi | Status | PIC |
 |----|------|-------|-------|--------|-----|
-| 11 | [11-glossary.md](11-glossary.md) | Glossary & Data Dictionary | — | ☐ Belum Dibuat | [PIC] |
+| 11 | [11-glossary.md](../11-glossary.md) | Glossary & Data Dictionary | — | ☐ Belum Dibuat | [PIC] |
 
 ### 2.7 Ringkasan Status (Status Summary)
 
@@ -151,23 +151,23 @@ Setiap domain informasi memiliki satu dokumen otoritatif sebagai rujukan tunggal
 
 | Domain Informasi | Source of Truth | Dokumen Konsumen |
 |------------------|-----------------|-------------------|
-| Visi, misi, dan lingkup project | [01-project-charter.md](01-project-charter.md) | Seluruh dokumen |
-| Strategi pembangunan bertahap (phasing) | [02-product-roadmap.md](02-product-roadmap.md) | 01, 03, 04, 08 |
-| Kebutuhan fungsional dan non-fungsional | [03-product-requirements/](03-product-requirements/README.md) | 04, 05, 06, 07, 09 |
-| Arsitektur sistem dan technology stack | [04-technical-specification/](04-technical-specification/README.md) | 05, 06, 08, 10 |
-| Skema database dan relasi entitas | [05-database-design.md](05-database-design.md) | 06, 07, 08, 09, 10 |
-| Kontrak API (endpoint, request, response) | [06-api-specification.md](06-api-specification.md) | 07, 08, 09, 10 |
-| Keterlacakan requirement ke implementasi | [07-traceability-matrix.md](07-traceability-matrix.md) | — |
-| Spesifikasi fitur per modul | [08-feature-specification.md](08-feature-specification.md) | 09 |
-| Skenario dan kriteria pengujian | [09-test-plan.md](09-test-plan.md) | 10 |
-| Prosedur deployment dan konfigurasi | [10-deployment-guide.md](10-deployment-guide.md) | — |
-| Definisi istilah dan kamus data | [11-glossary.md](11-glossary.md) | Seluruh dokumen |
+| Visi, misi, dan lingkup project | [01-project-charter.md](../01-project-charter/01-project-charter.md) | Seluruh dokumen |
+| Strategi pembangunan bertahap (phasing) | [02-product-roadmap.md](../02-product-roadmap.md) | 01, 03, 04, 08 |
+| Kebutuhan fungsional dan non-fungsional | [03-product-requirements/](../03-product-requirements/README.md) | 04, 05, 06, 07, 09 |
+| Arsitektur sistem dan technology stack | [04-technical-specification/](../04-technical-specification/README.md) | 05, 06, 08, 10 |
+| Skema database dan relasi entitas | [05-database-design.md](../05-database-design.md) | 06, 07, 08, 09, 10 |
+| Kontrak API (endpoint, request, response) | [06-api-specification.md](../06-api-specification.md) | 07, 08, 09, 10 |
+| Keterlacakan requirement ke implementasi | [07-traceability-matrix.md](../07-traceability-matrix.md) | — |
+| Spesifikasi fitur per modul | [08-feature-specification.md](../08-feature-specification.md) | 09 |
+| Skenario dan kriteria pengujian | [09-test-plan.md](../09-test-plan.md) | 10 |
+| Prosedur deployment dan konfigurasi | [10-deployment-guide.md](../10-deployment-guide.md) | — |
+| Definisi istilah dan kamus data | [11-glossary.md](../11-glossary.md) | Seluruh dokumen |
 
 ---
 
 ## 4. Daftar Modul (Module Registry)
 
-Sistem POS Rumah Makan terdiri dari 12 modul yang dibangun secara bertahap. Detail cakupan dan urutan pembangunan diatur dalam [02-product-roadmap.md](02-product-roadmap.md).
+Sistem POS Rumah Makan terdiri dari 12 modul yang dibangun secara bertahap. Detail cakupan dan urutan pembangunan diatur dalam [02-product-roadmap.md](../02-product-roadmap.md).
 
 | ID | Modul | Ringkasan |
 |----|-------|-----------|

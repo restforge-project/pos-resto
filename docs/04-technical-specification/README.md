@@ -29,7 +29,7 @@ Dokumen ini menjelaskan **bagaimana** sistem dibangun pada level arsitektur — 
 
 Lingkup dokumen mencakup arsitektur untuk **MVP** POS Rumah Makan dengan batasan yang telah disepakati:
 
-- **Mode operasi:** online-only. Dukungan offline-first **ditunda** ke fase lanjutan. Lihat catatan revisi pada [01-project-charter](../01-project-charter.md) (OBJ-2).
+- **Mode operasi:** online-only. Dukungan offline-first **ditunda** ke fase lanjutan. Lihat catatan revisi pada [01-project-charter](../01-project-charter/01-project-charter.md) (OBJ-2).
 - **Tenancy:** single-tenant — melayani satu rumah makan pilot terlebih dahulu. Desain multi-tenant dipertimbangkan setelah validasi pilot.
 - **Cakupan modul:** keputusan arsitektur bersifat lintas modul, namun contoh konkret pada dokumen ini menggunakan **M-001 Manajemen Produk & Kategori** sebagai rujukan implementasi pertama.
 
@@ -48,7 +48,7 @@ Dokumen rujukan terkait:
 
 | Dokumen | Hubungan |
 |---------|----------|
-| [01-project-charter](../01-project-charter.md) | Sumber visi, lingkup, dan batasan (online-only, single-tenant) |
+| [01-project-charter](../01-project-charter/01-project-charter.md) | Sumber visi, lingkup, dan batasan (online-only, single-tenant) |
 | [03-product-requirements](../03-product-requirements/README.md) | Sumber kebutuhan fungsional & non-fungsional yang diwujudkan arsitektur ini |
 | [05-database-design](../05-database-design/README.md) | Konsumen: skema tabel diturunkan dari arsitektur data di sini |
 | [06-api-specification](../06-api-specification.md) | Konsumen: kontrak endpoint mengikuti pola RESTForge yang dijelaskan di sini |

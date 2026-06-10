@@ -76,8 +76,8 @@ Seluruh dokumen disusun mengikuti tahapan SDLC dengan penomoran berurutan. Titik
 
 | Dokumen | Deskripsi |
 |---------|-----------|
-| [00-document-index.md](docs/00-document-index.md) | Indeks dan peta navigasi seluruh dokumen |
-| [01-project-charter.md](docs/01-project-charter.md) | Visi, tujuan, dan ruang lingkup project |
+| [00-document-index.md](docs/00-document-index/00-document-index.md) | Indeks dan peta navigasi seluruh dokumen |
+| [01-project-charter.md](docs/01-project-charter/01-project-charter.md) | Visi, tujuan, dan ruang lingkup project |
 | [03-product-requirements.md](docs/03-product-requirements.md) | Kebutuhan fungsional dan non-fungsional |
 | [04-technical-specification.md](docs/04-technical-specification.md) | Arsitektur sistem dan technology stack |
 

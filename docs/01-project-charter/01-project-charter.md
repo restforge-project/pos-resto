@@ -41,7 +41,7 @@ Tujuan dirumuskan secara ringkas dan terukur:
 
 ### 3.1 Termasuk dalam Lingkup (In Scope)
 
-MVP berfokus pada alur kasir inti, kemudian diperluas bertahap. Modul mengacu pada [00-document-index.md](00-document-index.md):
+MVP berfokus pada alur kasir inti, kemudian diperluas bertahap. Modul mengacu pada [00-document-index.md](../00-document-index/00-document-index.md):
 
 **Prioritas MVP (Must Have):**
 
@@ -90,7 +90,7 @@ Untuk menjaga proyek tetap fokus, hal berikut tidak dikerjakan pada tahap awal:
 
 ## 5. Tahapan & Target Waktu (Milestones)
 
-Penjadwalan dibuat sederhana berbasis target MVP. Detail urutan modul akan dirinci di [02-product-roadmap.md](02-product-roadmap.md).
+Penjadwalan dibuat sederhana berbasis target MVP. Detail urutan modul akan dirinci di [02-product-roadmap.md](../02-product-roadmap.md).
 
 | Tahap | Fokus | Target |
 |-------|-------|--------|
