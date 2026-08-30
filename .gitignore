@@ -4,6 +4,10 @@ design-template/
 
 # Source code lokal (tidak masuk repository)
 /src/
+/schema/
+
+# Konfigurasi lokal Claude Code
+.claude/
 
 # Dependencies
 node_modules/
