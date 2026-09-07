@@ -111,7 +111,7 @@ Frontend memakai **design template admin Bootstrap 5 + jQuery** yang sudah ditet
 | Grafik | ApexCharts |
 | Styling | SCSS (dikompilasi ke `style.css`) |
 
-Halaman yang relevan untuk **M-001** sudah tersedia di template: `categories.html`, `items.html`, dan `pos.html`. Pola integrasi (AuthClient, `$.ajaxSetup`, modul per-halaman) mengikuti contoh use-case RESTForge; pemetaan rinci dibahas di [Bagian 6 — Frontend](frontend-integrasi.md).
+Halaman yang relevan untuk **M-001** disusun dari template: `categories.html` dan `items.html` untuk master data, `variants.html` dan `modifiers.html` untuk varian serta modifier, dan `pos.html` untuk kasir. Pola integrasi (AuthClient, `$.ajaxSetup`, modul per-halaman) mengikuti contoh use-case RESTForge; pemetaan rinci dibahas di [Bagian 6 — Frontend](frontend-integrasi.md).
 
 ### 3.4 Data & Infrastruktur
 

@@ -7,9 +7,9 @@
 |---|---|
 | **Nama Proyek** | POS Rumah Makan (Point of Sale System untuk Restoran) |
 | **Dokumen** | 05 — Database Design (folder) |
-| **Versi Dokumen** | 0.1 |
+| **Versi Dokumen** | 0.2 |
 | **Tanggal Dibuat** | 2026-06-06 |
-| **Terakhir Diperbarui** | 2026-06-06 |
+| **Terakhir Diperbarui** | 2026-08-30 |
 | **PIC** | Project Lead |
 | **Status** | Draft |
 
@@ -61,8 +61,9 @@ updated_by: 'string:100'
 | Kebutuhan | Tipe SDF | Catatan |
 |-----------|----------|---------|
 | Identifier (PK/FK) | `string:36` | UUID disimpan sebagai string 36 karakter |
-| Kode/label pendek | `string:20` – `string:100` | mis. `category_code`, `product_name` |
+| Kode/label pendek | `string:20` – `string:100` | mis. `product_code`, `product_name` |
 | Deskripsi panjang | `text` | bebas panjang |
+| Metadata file upload | `json` | JSONB pada PostgreSQL; berisi array metadata file hasil endpoint `/upload` (mis. `photo_url`) |
 | Harga & penyesuaian harga | `decimal:15,2` | nominal Rupiah; `checks` `gte: 0` menjaga non-negatif (BR-004) |
 | Urutan tampil | `integer default:0` | mis. `sort_order` (FR-003) |
 | Status aktif/ketersediaan | `boolean default:true` | `is_active` = status aktif/nonaktif record; `is_available` = sold-out (BR-006, BR-010) |
@@ -92,4 +93,7 @@ Detail sintaks tidak diduplikasi di sini; lihat catalog SDF RESTForge berdasarka
 
 ## Riwayat Perubahan
 
-| Versi | Tanggal | Peru
+| Versi | Tanggal | Perubahan | PIC |
+|-------|---------|-----------|-----|
+| 0.1 | 2026-06-06 | Dokumen index dibuat: konvensi penamaan, kolom audit, tipe data, dan indeks modul | Project Lead |
+| 0.2 | 2026-08-30 | Tabel tipe data ditambah baris `json` untuk metadata file upload; contoh kode pendek disesuaikan setelah `category_code` dihapus | Project Lead |

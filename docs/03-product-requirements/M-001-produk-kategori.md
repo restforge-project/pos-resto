@@ -8,9 +8,9 @@
 | **ID Modul** | M-001 |
 | **Nama Modul** | Manajemen Produk & Kategori |
 | **Bagian dari** | [03-product-requirements.md](README.md) (PRD induk) |
-| **Versi Dokumen** | 1.0 |
+| **Versi Dokumen** | 1.2 |
 | **Tanggal Dibuat** | 2026-06-06 |
-| **Terakhir Diperbarui** | 2026-06-06 |
+| **Terakhir Diperbarui** | 2026-08-30 |
 | **PIC** | Project Lead |
 | **Status** | Draft |
 
@@ -72,7 +72,7 @@ Functional Requirement menyatakan kemampuan konkret yang harus disediakan sistem
 
 | ID | Kebutuhan Fungsional | Sumber | Prioritas |
 |----|----------------------|--------|-----------|
-| FR-001 | Sistem harus memungkinkan pengguna **membuat kategori** dengan atribut: nama (wajib, unik), deskripsi (opsional), dan status aktif. | US-001 | Must Have |
+| FR-001 | Sistem harus memungkinkan pengguna **membuat kategori** dengan atribut: nama (wajib, unik), deskripsi (opsional), foto kategori (opsional), dan status aktif. Kategori tidak memakai kode; nama menjadi satu-satunya identitas yang dilihat pengguna. | US-001 | Must Have |
 | FR-002 | Sistem harus memungkinkan pengguna **mengubah dan menghapus** kategori. Penghapusan ditolak jika masih ada item produk yang tertaut pada kategori tersebut (lihat Bagian 4). | US-001 | Must Have |
 | FR-003 | Sistem harus memungkinkan pengguna **menetapkan urutan tampil** kategori (mis. melalui nomor urut atau drag-and-drop) dan menyimpannya. | US-002 | Should Have |
 | FR-004 | Sistem harus memungkinkan pengguna **mengaktifkan/menonaktifkan** kategori. Kategori nonaktif tidak ditampilkan pada layar order namun datanya tetap tersimpan. | US-010 | Should Have |
@@ -178,3 +178,4 @@ Acceptance Criteria menetapkan kondisi yang harus terpenuhi agar sebuah kebutuha
 |-------|---------|-----------|-----|
 | 1.0 | 2026-06-06 | Isi M-001 dipindahkan ke file modul terpisah; penyesuaian penomoran bagian (1–5) dan revisi bahasa hasil review | Project Lead |
 | 1.1 | 2026-06-06 | FR-007, BR-005, AC-007 direvisi: hapus framing soft-delete; `is_active` murni status aktif/nonaktif, pencegahan hapus via penolakan (FK referensi) | Project Lead |
+| 1.2 | 2026-08-30 | FR-001 diperluas: kategori memiliki foto opsional dan tidak lagi memakai kode kategori, mengikuti template UI dan penyesuaian skema pada [database design M-001](../05-database-design/M-001-produk-kategori.md) | Project Lead |

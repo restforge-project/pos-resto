@@ -8,15 +8,17 @@
 | **ID Modul** | M-001 |
 | **Nama Modul** | Manajemen Produk & Kategori |
 | **Bagian dari** | [README.md](README.md) (Database Design — index) |
-| **Versi Dokumen** | 1.1 |
+| **Versi Dokumen** | 1.4 |
 | **Tanggal Dibuat** | 2026-06-06 |
-| **Terakhir Diperbarui** | 2026-06-06 |
+| **Terakhir Diperbarui** | 2026-08-30 |
 | **PIC** | Project Lead |
 | **Status** | Draft |
 
 > Skema ditulis dalam format **SDF RESTForge** (`schema/<table>.js`). Konvensi penamaan, kolom audit, dan tipe data mengikuti [README.md](README.md) index. Kebutuhan sumber: [PRD M-001](../03-product-requirements/M-001-produk-kategori.md).
 >
 > **Catatan penamaan (v1.2):** Seluruh terminologi modul diseragamkan memakai istilah **produk**. Entitas yang dijual memakai domain **`product`** (sebelumnya `menu_item`); istilah lama untuk daftar hidangan kini sepenuhnya digantikan oleh **produk**, baik pada dokumen ini maupun PRD.
+>
+> **Catatan penyesuaian (v1.3):** `category_code` dihapus — kategori diidentifikasi lewat `category_name` saja (FR-001 v1.2). Kolom foto pada `product_category` dan `product` memakai tipe SDF `json` (JSONB pada PostgreSQL) karena mengikuti kontrak fitur upload RESTForge, yang menyimpan **array metadata file**, bukan string path. Lihat Bagian 6.
 
 ---
 
@@ -67,9 +69,9 @@ module.exports = ({ defineModel }) => defineModel('product_category', {
 
   fields: {
     product_category_id: 'string:36 pk',
-    category_code:       'string:20 notnull unique',
     category_name:       'string:100 notnull unique',
     description:         'text',
+    photo_url:           'json',
     sort_order:          'integer notnull default:0',
     is_active:           'boolean default:true',
     created_at:          'timestamp default:now()',
@@ -84,18 +86,18 @@ module.exports = ({ defineModel }) => defineModel('product_category', {
 });
 ```
 
-**Catatan:** `category_code` dan `category_name` `unique` (FR-001, BR-001). Keunikan **case-insensitive** ditegakkan di layer RDF/aplikasi (lihat Bagian 5). `sort_order` mendukung pengurutan tampil (FR-003). `is_active` untuk nonaktif tanpa hapus (FR-004).
+**Catatan:** `category_name` `unique` sebagai satu-satunya identitas kategori (FR-001, BR-001); kode kategori tidak dipakai. Keunikan **case-insensitive** ditegakkan di layer RDF/aplikasi (lihat Bagian 5). `photo_url` menampung array metadata file foto kategori (lihat Bagian 6). `sort_order` mendukung pengurutan tampil (FR-003). `is_active` untuk nonaktif tanpa hapus (FR-004).
 
 **Contoh data:**
 
-| category_code | category_name | description | sort_order | is_active |
-|---|---|---|---|---|
-| MKN | Makanan | Hidangan utama | 1 | true |
-| MIN | Minuman | Aneka minuman | 2 | true |
-| CML | Cemilan | Camilan & gorengan | 3 | true |
-| PKT | Paket Hemat | Paket bundling hemat | 4 | true |
+| category_name | description | sort_order | is_active |
+|---|---|---|---|
+| Makanan | Hidangan utama | 1 | true |
+| Minuman | Aneka minuman | 2 | true |
+| Cemilan | Camilan & gorengan | 3 | true |
+| Paket Hemat | Paket bundling hemat | 4 | true |
 
-> Contoh data merujuk relasi memakai **kode** agar mudah dibaca (mis. `product.product_category_id` ditunjuk lewat `category_code`). Di database, nilai `*_id` sesungguhnya berupa UUID `string:36`. Kolom audit (`created_at`, dst) diisi runtime dan tidak ditampilkan.
+> Contoh data merujuk relasi memakai **nama kategori** dan **kode produk** agar mudah dibaca (mis. `product.product_category_id` ditunjuk lewat `category_name`). Di database, nilai `*_id` sesungguhnya berupa UUID `string:36`. Kolom audit (`created_at`, dst) dan `photo_url` diisi runtime dan tidak ditampilkan.
 
 ### 4.2 `product` — `schema/product.js`
 
@@ -112,7 +114,7 @@ module.exports = ({ defineModel }) => defineModel('product', {
     product_category_id: 'string:36 notnull',
     description:         'text',
     base_price:          'decimal:15,2 notnull default:0',
-    photo_url:           'string:255',
+    photo_url:           'json',
     is_available:        'boolean default:true',
     is_active:           'boolean default:true',
     sort_order:          'integer notnull default:0',
@@ -145,20 +147,20 @@ module.exports = ({ defineModel }) => defineModel('product', {
 });
 ```
 
-**Catatan:** `product_category_id notnull` + FK `onDelete: restrict` mewujudkan BR-003 (produk wajib satu kategori) dan BR-002 (kategori tak bisa dihapus selama dipakai produk). `base_price` dijaga `>= 0` lewat CHECK (BR-004). `is_available` = status Habis/Tersedia manual (FR-010, BR-010); `is_active` = status aktif/nonaktif record (FR-009, FR-004), **bukan** penanda penghapusan. Pencegahan hapus produk yang masih dipakai transaksi ditangani FK `onDelete: restrict` dari tabel order (M-002), bukan `is_active` (BR-005). `photo_url` menyimpan path/URL foto (FR-008).
+**Catatan:** `product_category_id notnull` + FK `onDelete: restrict` mewujudkan BR-003 (produk wajib satu kategori) dan BR-002 (kategori tak bisa dihapus selama dipakai produk). `base_price` dijaga `>= 0` lewat CHECK (BR-004). `is_available` = status Habis/Tersedia manual (FR-010, BR-010); `is_active` = status aktif/nonaktif record (FR-009, FR-004), **bukan** penanda penghapusan. Pencegahan hapus produk yang masih dipakai transaksi ditangani FK `onDelete: restrict` dari tabel order (M-002), bukan `is_active` (BR-005). `photo_url` menampung array metadata file foto produk (FR-008, lihat Bagian 6).
 
 **Contoh data:**
 
-| product_code | product_name | product_category_id | base_price | photo_url | is_available | is_active |
-|---|---|---|---|---|---|---|
-| PRD-001 | Nasi Goreng Spesial | MKN | 25000 | nasi-goreng-spesial.jpg | true | true |
-| PRD-002 | Mie Ayam Bakso | MKN | 20000 | mie-ayam-bakso.jpg | true | true |
-| PRD-003 | Ayam Geprek | MKN | 22000 | ayam-geprek.jpg | true | true |
-| PRD-004 | Es Teh Manis | MIN | 5000 | es-teh-manis.jpg | true | true |
-| PRD-005 | Es Jeruk | MIN | 8000 | es-jeruk.jpg | true | true |
-| PRD-006 | Kopi Hitam | MIN | 7000 | kopi-hitam.jpg | true | true |
-| PRD-007 | Kentang Goreng | CML | 15000 | kentang-goreng.jpg | true | true |
-| PRD-008 | Paket Hemat A | PKT | 30000 | paket-hemat-a.jpg | false | true |
+| product_code | product_name | product_category_id | base_price | is_available | is_active |
+|---|---|---|---|---|---|
+| PRD-001 | Nasi Goreng Spesial | Makanan | 25000 | true | true |
+| PRD-002 | Mie Ayam Bakso | Makanan | 20000 | true | true |
+| PRD-003 | Ayam Geprek | Makanan | 22000 | true | true |
+| PRD-004 | Es Teh Manis | Minuman | 5000 | true | true |
+| PRD-005 | Es Jeruk | Minuman | 8000 | true | true |
+| PRD-006 | Kopi Hitam | Minuman | 7000 | true | true |
+| PRD-007 | Kentang Goreng | Cemilan | 15000 | true | true |
+| PRD-008 | Paket Hemat A | Paket Hemat | 30000 | false | true |
 
 ### 4.3 `product_variant` — `schema/product_variant.js`
 
@@ -352,3 +354,36 @@ Sebagian aturan bisnis tidak dapat dinyatakan murni di SDF dan ditegakkan di lay
 | Aturan | Penegakan |
 |--------|-----------|
 | BR-001 — keunikan nama kategori **case-insensitive** | Validasi RDF (`fieldValidation`) / query `UPPER()`; DB hanya menjamin unik case-sensitive |
+| FR-001, FR-008 — batas format dan ukuran file foto | `uploadConfig` di payload RDF (`allowedTypes`, `maxFileSize`, `maxFiles`); database hanya menyimpan metadata, tanpa validasi file |
+
+---
+
+## 6. Penyimpanan Foto (File Storage)
+
+Kolom `photo_url` pada `product_category` dan `product` mengikuti kontrak fitur upload RESTForge, bukan kolom path biasa.
+
+| Aspek | Ketentuan |
+|-------|-----------|
+| Tipe SDF | `json` → JSONB pada PostgreSQL (MySQL: JSON, Oracle: CLOB, SQLite: TEXT) |
+| Isi kolom | **Array** metadata file: `key`, `originalName`, `fileName`, `contentType`, `size`, `url`, `provider`, `uploadedAt`, `uploadedBy` |
+| Aktivasi endpoint | `action.upload: true` + `uploadConfig` pada payload RDF; menghasilkan `/upload` dan `/upload-delete` |
+| Storage provider | `STORAGE_PROVIDER=s3` pada `config/db-connection.env`; bucket `pos-storage-26` region `ap-southeast-3`, dengan key mengikuti pola `{project}/{module}/{endpoint}/{prefix}/{yyyy-mm}/{uuid}-{nama-file}`. Nilai `url` pada metadata berupa URL bucket S3, sehingga static file serving tidak diperlukan |
+| Prasyarat | `STORAGE_ENABLED=true`, kredensial S3 (`S3_BUCKET`, `S3_REGION`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`), `UPLOAD_TEMP_DIR` untuk buffer Multer, serta Redis aktif untuk orphan file tracking dan cleanup job |
+| Hapus record | File ikut dihapus otomatis saat `/delete` selama `uploadConfig.deleteOnRecordDelete` bernilai `true` (default) |
+
+Endpoint `/upload` tidak menyentuh database. Client meng-upload file lebih dulu, lalu mengirim metadata hasil upload sebagai nilai field `photo_url` pada `/create` atau `/update`.
+
+> **Status verifikasi (2026-08-30):** akses bucket sudah diuji dan berfungsi untuk operasi `HeadBucket`, `ListObjectsV2`, `PutObject`, `GetObject`, dan `DeleteObject`. Redis pada `localhost:6380` belum dapat dipakai karena `REDIS_PASSWORD` masih kosong sementara instance-nya menuntut autentikasi (`NOAUTH Authentication required`), sehingga orphan file tracking dan cleanup job belum aktif.
+
+> **Catatan:** tipe kolom tidak boleh diganti menjadi `string`. Validator payload RESTForge hanya menerima `columnType` bernilai `jsonb`, `json`, `clob`, atau `text` untuk field upload.
+
+---
+
+## Riwayat Perubahan
+
+| Versi | Tanggal | Perubahan | PIC |
+|-------|---------|-----------|-----|
+| 1.1 | 2026-06-06 | Penyelarasan hasil review dokumen | Project Lead |
+| 1.2 | 2026-06-06 | Terminologi modul diseragamkan menjadi **produk** (`menu_item` → `product`) | Project Lead |
+| 1.3 | 2026-08-30 | `category_code` dihapus dari `product_category`; `photo_url` ditambahkan pada `product_category` dan diubah menjadi `json` pada `product` mengikuti kontrak fitur upload; Bagian 6 ditambahkan | Project Lead |
+| 1.4 | 2026-08-30 | Bagian 6: storage provider diubah dari local menjadi AWS S3 (bucket `pos-storage-26`, region `ap-southeast-3`); prasyarat dan status verifikasi akses bucket ditambahkan | Project Lead |

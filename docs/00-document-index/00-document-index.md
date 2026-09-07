@@ -155,7 +155,7 @@ Setiap domain informasi memiliki satu dokumen otoritatif sebagai rujukan tunggal
 | Strategi pembangunan bertahap (phasing) | [02-product-roadmap.md](../02-product-roadmap.md) | 01, 03, 04, 08 |
 | Kebutuhan fungsional dan non-fungsional | [03-product-requirements/](../03-product-requirements/README.md) | 04, 05, 06, 07, 09 |
 | Arsitektur sistem dan technology stack | [04-technical-specification/](../04-technical-specification/README.md) | 05, 06, 08, 10 |
-| Skema database dan relasi entitas | [05-database-design.md](../05-database-design.md) | 06, 07, 08, 09, 10 |
+| Skema database dan relasi entitas | [05-database-design/](../05-database-design/README.md) | 06, 07, 08, 09, 10 |
 | Kontrak API (endpoint, request, response) | [06-api-specification.md](../06-api-specification.md) | 07, 08, 09, 10 |
 | Keterlacakan requirement ke implementasi | [07-traceability-matrix.md](../07-traceability-matrix.md) | — |
 | Spesifikasi fitur per modul | [08-feature-specification.md](../08-feature-specification.md) | 09 |
