@@ -8,9 +8,9 @@
 | **ID Modul** | M-001 |
 | **Nama Modul** | Manajemen Produk & Kategori |
 | **Bagian dari** | [README.md](README.md) (Database Design — index) |
-| **Versi Dokumen** | 1.4 |
+| **Versi Dokumen** | 1.7 |
 | **Tanggal Dibuat** | 2026-06-06 |
-| **Terakhir Diperbarui** | 2026-08-30 |
+| **Terakhir Diperbarui** | 2026-09-08 |
 | **PIC** | Project Lead |
 | **Status** | Draft |
 
@@ -147,7 +147,7 @@ module.exports = ({ defineModel }) => defineModel('product', {
 });
 ```
 
-**Catatan:** `product_category_id notnull` + FK `onDelete: restrict` mewujudkan BR-003 (produk wajib satu kategori) dan BR-002 (kategori tak bisa dihapus selama dipakai produk). `base_price` dijaga `>= 0` lewat CHECK (BR-004). `is_available` = status Habis/Tersedia manual (FR-010, BR-010); `is_active` = status aktif/nonaktif record (FR-009, FR-004), **bukan** penanda penghapusan. Pencegahan hapus produk yang masih dipakai transaksi ditangani FK `onDelete: restrict` dari tabel order (M-002), bukan `is_active` (BR-005). `photo_url` menampung array metadata file foto produk (FR-008, lihat Bagian 6).
+**Catatan:** `product_code notnull unique` mewujudkan kode produk wajib dan unik (FR-005, BR-011). `product_category_id notnull` + FK `onDelete: restrict` mewujudkan BR-003 (produk wajib satu kategori) dan BR-002 (kategori tak bisa dihapus selama dipakai produk). `base_price` dijaga `>= 0` lewat CHECK (BR-004). `is_available` = status Habis/Tersedia manual (FR-010, BR-010); `is_active` = status aktif/nonaktif record (FR-009, FR-004), **bukan** penanda penghapusan. Pencegahan hapus produk yang masih dipakai transaksi ditangani FK `onDelete: restrict` dari tabel order (M-002), bukan `is_active` (BR-005). `photo_url` menampung array metadata file foto produk (FR-008, lihat Bagian 6).
 
 **Contoh data:**
 
@@ -175,6 +175,7 @@ module.exports = ({ defineModel }) => defineModel('product_variant', {
     product_id:         'string:36 notnull',
     group_name:         'string:50 notnull',
     option_name:        'string:50 notnull',
+    price_mode:         "string:10 notnull default:'adjustment'",
     price_adjustment:   'decimal:15,2 notnull default:0',
     is_default:         'boolean default:false',
     sort_order:         'integer notnull default:0',
@@ -190,6 +191,7 @@ module.exports = ({ defineModel }) => defineModel('product_variant', {
   ],
 
   checks: [
+    { field: 'price_mode', in: ['adjustment', 'absolute'] },
     { field: 'price_adjustment', gte: 0 }
   ],
 
@@ -210,18 +212,20 @@ module.exports = ({ defineModel }) => defineModel('product_variant', {
 });
 ```
 
-**Catatan:** `group_name` (mis. "Ukuran") + `option_name` (mis. "Besar") dengan `price_adjustment` (FR-011). Composite unique mencegah opsi varian ganda pada produk yang sama. FK `onDelete: cascade`, yaitu varian ikut terhapus bila produk dihapus. `price_adjustment >= 0` (BR-004).
+**Catatan:** `group_name` (mis. "Ukuran") + `option_name` (mis. "Besar") dengan harga per opsi (FR-011). `price_mode` menentukan arti `price_adjustment`: pada `adjustment` nilainya selisih yang ditambahkan ke `product.base_price`, pada `absolute` nilainya harga jual opsi itu sendiri. Nama kolom `price_adjustment` dipertahankan agar data dan endpoint yang ada tidak perlu dimigrasi. CHECK `in` membatasi mode pada dua nilai itu; `price_adjustment >= 0` (BR-004). Aturan harga absolut minimal sama dengan harga dasar (BR-012) melibatkan dua tabel sehingga ditegakkan di layer aplikasi (lihat Bagian 5). Composite unique mencegah opsi varian ganda pada produk yang sama. FK `onDelete: cascade`, yaitu varian ikut terhapus bila produk dihapus.
 
 **Contoh data:**
 
-| product_id | group_name | option_name | price_adjustment | is_default | sort_order |
-|---|---|---|---|---|---|
-| PRD-001 | Porsi | Biasa | 0 | true | 1 |
-| PRD-001 | Porsi | Jumbo | 8000 | false | 2 |
-| PRD-004 | Ukuran | Reguler | 0 | true | 1 |
-| PRD-004 | Ukuran | Jumbo | 3000 | false | 2 |
-| PRD-006 | Ukuran | Reguler | 0 | true | 1 |
-| PRD-006 | Ukuran | Large | 4000 | false | 2 |
+| product_id | group_name | option_name | price_mode | price_adjustment | is_default | sort_order | Harga opsi |
+|---|---|---|---|---|---|---|---|
+| PRD-001 | Porsi | Biasa | adjustment | 0 | true | 1 | 25000 |
+| PRD-001 | Porsi | Jumbo | adjustment | 8000 | false | 2 | 33000 |
+| PRD-004 | Ukuran | Reguler | adjustment | 0 | true | 1 | 5000 |
+| PRD-004 | Ukuran | Jumbo | absolute | 8000 | false | 2 | 8000 |
+| PRD-006 | Ukuran | Reguler | adjustment | 0 | true | 1 | 7000 |
+| PRD-006 | Ukuran | Large | absolute | 11000 | false | 2 | 11000 |
+
+Kolom "Harga opsi" bukan kolom tabel, melainkan hasil hitung FR-014 dari `base_price` produk dan baris varian: mode `adjustment` menjumlahkan, mode `absolute` memakai nilainya langsung.
 
 ### 4.4 `product_modifier_group` — `schema/product_modifier_group.js`
 
@@ -272,7 +276,7 @@ module.exports = ({ defineModel }) => defineModel('product_modifier_group', {
 });
 ```
 
-**Catatan:** `is_required`, `min_select`, `max_select` mewujudkan aturan wajib/opsional & batas pilihan (FR-013, BR-008). CHECK menjaga `min_select >= 0` dan `max_select >= 1`. Konsistensi `min_select <= max_select` antar-field tidak didukung CHECK SDF dan ditegakkan di layer RDF/aplikasi (lihat Bagian 5).
+**Catatan:** `is_required`, `min_select`, `max_select` mewujudkan aturan wajib/opsional & batas pilihan (FR-013, BR-008). CHECK menjaga `min_select >= 0` dan `max_select >= 1`. Konsistensi `min_select <= max_select` antar-field dan syarat `min_select >= 1` pada grup wajib tidak dapat dinyatakan di CHECK SDF maupun `fieldValidation` RDF, sehingga hanya ditegakkan di client (lihat Bagian 5).
 
 **Contoh data:**
 
@@ -355,6 +359,9 @@ Sebagian aturan bisnis tidak dapat dinyatakan murni di SDF dan ditegakkan di lay
 |--------|-----------|
 | BR-001 — keunikan nama kategori **case-insensitive** | Validasi RDF (`fieldValidation`) / query `UPPER()`; DB hanya menjamin unik case-sensitive |
 | FR-001, FR-008 — batas format dan ukuran file foto | `uploadConfig` di payload RDF (`allowedTypes`, `maxFileSize`, `maxFiles`); database hanya menyimpan metadata, tanpa validasi file |
+| BR-012 — harga varian mode `absolute` minimal sama dengan `product.base_price` | Validasi client pada form varian (`js/variants.js`); CHECK tidak dapat membandingkan kolom lintas tabel, dan `fieldValidation` RDF hanya menilai field pada record yang sama |
+| BR-008 — `min_select <= max_select` pada grup modifier | Validasi client pada form modifier (`js/modifiers.js`). CHECK SDF hanya membandingkan satu kolom dengan nilai literal, dan constraint lintas field pada `fieldValidation` RDF (`before`/`after`) hanya berlaku untuk tipe date. Backend tidak menolak nilai yang melanggar; validasi order pada M-002 menjadi pengaman berikutnya |
+| BR-008 — grup wajib (`is_required = true`) mensyaratkan `min_select >= 1` | Validasi client pada form modifier (`js/modifiers.js`), dengan keterbatasan yang sama seperti baris di atas |
 
 ---
 
@@ -387,3 +394,6 @@ Endpoint `/upload` tidak menyentuh database. Client meng-upload file lebih dulu,
 | 1.2 | 2026-06-06 | Terminologi modul diseragamkan menjadi **produk** (`menu_item` → `product`) | Project Lead |
 | 1.3 | 2026-08-30 | `category_code` dihapus dari `product_category`; `photo_url` ditambahkan pada `product_category` dan diubah menjadi `json` pada `product` mengikuti kontrak fitur upload; Bagian 6 ditambahkan | Project Lead |
 | 1.4 | 2026-08-30 | Bagian 6: storage provider diubah dari local menjadi AWS S3 (bucket `pos-storage-26`, region `ap-southeast-3`); prasyarat dan status verifikasi akses bucket ditambahkan | Project Lead |
+| 1.5 | 2026-09-08 | Catatan 4.2: `product_code` ditautkan ke FR-005 dan BR-011 setelah kode produk ditambahkan ke PRD ([issue #01](../20-issue/issue-01-product-code-wajib-tidak-ada-di-prd.md)) | Project Lead |
+| 1.6 | 2026-09-08 | `price_mode` (`adjustment`/`absolute`) ditambahkan pada `product_variant` beserta CHECK `in`; catatan dan contoh data 4.3 disesuaikan; Bagian 5 memuat penegakan BR-012 ([issue #02](../20-issue/issue-02-mode-harga-varian-absolut-tidak-didukung-schema.md)) | Project Lead |
+| 1.7 | 2026-09-08 | Catatan 4.4 dan Bagian 5: aturan `min_select <= max_select` dan `min_select >= 1` pada grup wajib dinyatakan hanya ditegakkan di client, bukan di RDF ([issue #04](../20-issue/issue-04-min-select-max-select-hanya-divalidasi-frontend.md)) | Project Lead |

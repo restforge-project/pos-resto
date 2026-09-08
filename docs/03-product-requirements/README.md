@@ -6,9 +6,9 @@
 | Informasi Dokumen | |
 |---|---|
 | **Nama Proyek** | POS Rumah Makan (Point of Sale System untuk Restoran) |
-| **Versi Dokumen** | 1.0 |
+| **Versi Dokumen** | 1.2 |
 | **Tanggal Dibuat** | 2026-06-06 |
-| **Terakhir Diperbarui** | 2026-06-06 |
+| **Terakhir Diperbarui** | 2026-09-08 |
 | **PIC** | Project Lead |
 | **Status** | Draft |
 
@@ -52,7 +52,7 @@ Setiap modul memiliki berkas PRD tersendiri. Detail User Story, Functional Requi
 
 | ID | Modul | Berkas PRD | Prioritas | Rentang ID | Status |
 |----|-------|-----------|-----------|-----------|--------|
-| M-001 | Manajemen Produk & Kategori | [M-001-produk-kategori.md](M-001-produk-kategori.md) | Must Have | US-001–012 · FR-001–016 · BR-001–010 · AC-001–015 | ✓ Draft lengkap |
+| M-001 | Manajemen Produk & Kategori | [M-001-produk-kategori.md](M-001-produk-kategori.md) | Must Have | US-001–012 · FR-001–016 · BR-001–012 · AC-001–018 | ✓ Draft lengkap |
 | M-002 | Manajemen Order (Kasir & Pelayan) | *(belum dibuat)* | Must Have | — | ☐ Belum |
 | M-003 | Manajemen Meja & Reservasi | *(belum dibuat)* | Should Have | — | ☐ Belum |
 | M-004 | Kitchen Display System (KDS) | *(belum dibuat)* | Should Have | — | ☐ Belum |
@@ -94,3 +94,5 @@ NFR berlaku **lintas modul** dan menjadi acuan kualitas bagi seluruh berkas modu
 | 0.4 | 2026-06-06 | Penambahan Business Rules M-001 (BR-001 s.d. BR-010) | Project Lead |
 | 0.5 | 2026-06-06 | Penambahan Acceptance Criteria M-001 (AC-001 s.d. AC-015); revisi bahasa hasil review | Project Lead |
 | 1.0 | 2026-06-06 | PRD dipecah per modul: file induk berisi pendahuluan, konvensi, NFR, dan indeks modul; isi M-001 dipindah ke berkas modul terpisah | Project Lead |
+| 1.1 | 2026-09-08 | Rentang ID M-001 diperbarui menjadi BR-001–011 dan AC-001–016 setelah penambahan kode produk (PRD M-001 v1.3) | Project Lead |
+| 1.2 | 2026-09-08 | Rentang ID M-001 diperbarui menjadi BR-001–012 dan AC-001–018 setelah penambahan mode harga varian (PRD M-001 v1.4) | Project Lead |

@@ -8,9 +8,9 @@
 | **ID Modul** | M-001 |
 | **Nama Modul** | Manajemen Produk & Kategori |
 | **Bagian dari** | [03-product-requirements.md](README.md) (PRD induk) |
-| **Versi Dokumen** | 1.2 |
+| **Versi Dokumen** | 1.4 |
 | **Tanggal Dibuat** | 2026-06-06 |
-| **Terakhir Diperbarui** | 2026-08-30 |
+| **Terakhir Diperbarui** | 2026-09-08 |
 | **PIC** | Project Lead |
 | **Status** | Draft |
 
@@ -49,7 +49,7 @@ User story menggambarkan kebutuhan dari sudut pandang pengguna dalam format: *Se
 |----|-------|------------|-----------|
 | US-001 | Pemilik/Manajer | Sebagai pemilik, saya ingin membuat dan mengubah **kategori produk** (mis. Makanan, Minuman, Cemilan), agar daftar produk tersusun rapi dan mudah ditemukan kasir. | Must Have |
 | US-002 | Pemilik/Manajer | Sebagai pemilik, saya ingin **mengatur urutan tampil kategori**, agar kategori yang paling sering dipakai muncul lebih dulu di layar kasir. | Should Have |
-| US-003 | Pemilik/Manajer | Sebagai pemilik, saya ingin menambah, mengubah, dan menghapus **item produk** beserta nama, deskripsi, dan kategorinya, agar katalog selalu mencerminkan produk yang benar-benar dijual. | Must Have |
+| US-003 | Pemilik/Manajer | Sebagai pemilik, saya ingin menambah, mengubah, dan menghapus **item produk** beserta kode, nama, deskripsi, dan kategorinya, agar katalog selalu mencerminkan produk yang benar-benar dijual. | Must Have |
 | US-004 | Pemilik/Manajer | Sebagai pemilik, saya ingin menetapkan **harga jual** untuk setiap item produk, agar kasir menagih harga yang konsisten dan benar. | Must Have |
 | US-005 | Pemilik/Manajer | Sebagai pemilik, saya ingin menambahkan **foto** pada item produk, agar kasir/pelayan lebih cepat dan akurat memilih produk saat order. | Could Have |
 | US-006 | Pemilik/Manajer | Sebagai pemilik, saya ingin mendefinisikan **varian** sebuah item (mis. ukuran Kecil/Sedang/Besar) dengan penyesuaian harga, agar satu item dapat dijual dalam beberapa pilihan tanpa membuat banyak item terpisah. | Should Have |
@@ -81,7 +81,7 @@ Functional Requirement menyatakan kemampuan konkret yang harus disediakan sistem
 
 | ID | Kebutuhan Fungsional | Sumber | Prioritas |
 |----|----------------------|--------|-----------|
-| FR-005 | Sistem harus memungkinkan pengguna **membuat item produk** dengan atribut: nama (wajib), kategori (wajib, satu kategori), deskripsi (opsional), dan harga jual (wajib). | US-003, US-004 | Must Have |
+| FR-005 | Sistem harus memungkinkan pengguna **membuat item produk** dengan atribut: kode produk (wajib, unik, maksimal 20 karakter), nama (wajib), kategori (wajib, satu kategori), deskripsi (opsional), dan harga jual (wajib). Kode produk menjadi identitas singkat item pada struk dan layar kasir, sekaligus rujukan yang tetap bagi modul Inventori (M-006) dan Promo (M-007) karena nama produk dapat berubah. | US-003, US-004 | Must Have |
 | FR-006 | Sistem harus memvalidasi bahwa **harga jual** berupa angka ≥ 0 dan menolak input tidak valid (negatif/non-numerik). | US-004 | Must Have |
 | FR-007 | Sistem harus memungkinkan pengguna **mengubah dan menghapus** item produk. Item yang masih direferensikan oleh transaksi tidak dapat dihapus; sistem menolak penghapusan tersebut (lihat Bagian 4). Penonaktifan item (`is_active`) adalah fungsi terpisah, bukan pengganti penghapusan. | US-003 | Must Have |
 | FR-008 | Sistem harus memungkinkan pengguna **mengunggah satu foto** per item produk dengan batas format dan ukuran tertentu, serta menampilkannya pada layar order. | US-005 | Could Have |
@@ -92,10 +92,10 @@ Functional Requirement menyatakan kemampuan konkret yang harus disediakan sistem
 
 | ID | Kebutuhan Fungsional | Sumber | Prioritas |
 |----|----------------------|--------|-----------|
-| FR-011 | Sistem harus memungkinkan pengguna mendefinisikan **varian** untuk sebuah item (mis. ukuran) dengan daftar opsi, di mana setiap opsi memiliki **penyesuaian harga** (absolut atau selisih terhadap harga dasar). | US-006 | Should Have |
+| FR-011 | Sistem harus memungkinkan pengguna mendefinisikan **varian** untuk sebuah item (mis. ukuran) dengan daftar opsi. Setiap opsi memiliki **harga** dalam salah satu dari dua mode: **selisih** (nilai ditambahkan ke harga dasar item) atau **absolut** (nilai menjadi harga jual opsi tersebut dan menggantikan harga dasar). | US-006 | Should Have |
 | FR-012 | Sistem harus memungkinkan pengguna mendefinisikan **grup modifier** (mis. Topping, Level Pedas) berisi beberapa opsi, di mana setiap opsi dapat memiliki **tambahan harga** (≥ 0). | US-007 | Should Have |
 | FR-013 | Sistem harus memungkinkan pengguna menetapkan grup modifier sebagai **wajib atau opsional**, serta menetapkan **batas minimum dan maksimum** jumlah opsi yang dapat dipilih. | US-008 | Should Have |
-| FR-014 | Sistem harus **menghitung harga akhir item** secara otomatis = harga dasar/varian + total tambahan modifier terpilih, dan menyediakannya bagi modul Order (M-002). | US-007 | Should Have |
+| FR-014 | Sistem harus **menghitung harga akhir item** secara otomatis = harga varian terpilih + total tambahan modifier terpilih, dan menyediakannya bagi modul Order (M-002). Harga varian terpilih adalah harga dasar + selisih pada mode selisih, nilai absolut pada mode absolut, atau harga dasar bila item tidak memiliki varian. | US-007 | Should Have |
 
 **D. Tampilan untuk Order (Konsumsi Katalog)**
 
@@ -124,6 +124,8 @@ Business Rule adalah ketentuan bisnis yang harus selalu dipenuhi sistem, terlepa
 | BR-008 | **Grup modifier wajib** mengharuskan minimal satu opsi dipilih saat order; jumlah pilihan harus mematuhi batas minimum dan maksimum yang ditetapkan. | FR-013 |
 | BR-009 | **Penghapusan grup modifier atau varian** yang masih tertaut ke item aktif harus memberi peringatan dan tidak boleh memutus integritas item tersebut (opsi: tolak hapus atau lepas tautan secara eksplisit). | FR-011, FR-012 |
 | BR-010 | **Status "Habis (Sold Out)" bersifat manual pada M-001.** Pengosongan/pengisian stok otomatis berbasis bahan baku diatur oleh M-006 dan, bila aktif, dapat menimpa status ketersediaan item. | FR-010 |
+| BR-011 | **Kode produk harus unik** dalam satu outlet. Sistem menolak pembuatan/perubahan item dengan kode yang sudah dipakai item lain. | FR-005 |
+| BR-012 | **Harga varian tidak boleh lebih murah dari harga dasar item.** Pada mode selisih, nilai selisih minimal 0 (BR-004); pada mode absolut, harga opsi minimal sama dengan harga dasar item. Sistem menolak opsi varian yang melanggar. | FR-011 |
 
 > **Catatan integrasi:** BR-007 (penguncian harga saat transaksi) dan BR-010 (sumber status ketersediaan) berada di perbatasan dengan M-002 dan M-006. Detail mekanismenya akan diselaraskan pada [04-technical-specification.md](../04-technical-specification/README.md) dan spesifikasi modul terkait.
 
@@ -146,19 +148,22 @@ Acceptance Criteria menetapkan kondisi yang harus terpenuhi agar sebuah kebutuha
 
 | ID | Skenario (Given–When–Then) | Verifikasi FR |
 |----|----------------------------|---------------|
-| AC-005 | **Diberikan** form item produk, **ketika** pengguna menyimpan item dengan nama, kategori, dan harga valid, **maka** item tersimpan dan tampil di kategori yang dipilih. | FR-005 |
+| AC-005 | **Diberikan** form item produk, **ketika** pengguna menyimpan item dengan kode, nama, kategori, dan harga valid, **maka** item tersimpan dan tampil di kategori yang dipilih. | FR-005 |
 | AC-006 | **Diberikan** form item produk, **ketika** pengguna mengisi harga negatif atau non-numerik, **maka** sistem menolak simpan dan menampilkan pesan validasi harga. | FR-006, BR-004 |
 | AC-007 | **Diberikan** sebuah item yang masih direferensikan transaksi, **ketika** pengguna mencoba menghapusnya, **maka** sistem menolak penghapusan karena data masih dipakai. Menonaktifkan item adalah aksi terpisah dan tidak menghapus record. | FR-007, BR-005 |
 | AC-008 | **Diberikan** sebuah item berstatus "Tersedia", **ketika** pengguna menandainya "Habis", **maka** item tidak lagi dapat dipilih pada layar pembuatan order namun tetap terlihat di pengelolaan produk. | FR-010, BR-006 |
 | AC-009 | **Diberikan** sebuah item, **ketika** pengguna mengunggah foto berformat dan berukuran sesuai batas, **maka** foto tersimpan dan tampil pada layar order; **ketika** file melebihi batas, **maka** sistem menolak unggah dengan pesan jelas. | FR-008 |
+| AC-016 | **Diberikan** item dengan kode "PRD-001" sudah terdaftar, **ketika** pengguna menyimpan item lain dengan kode "PRD-001", **maka** sistem menolak simpan dan menampilkan pesan kode produk sudah dipakai. | FR-005, BR-011 |
 
 **Varian & Modifier**
 
 | ID | Skenario (Given–When–Then) | Verifikasi FR |
 |----|----------------------------|---------------|
-| AC-010 | **Diberikan** item "Es Teh" dengan varian ukuran (Kecil +0, Besar +3.000), **ketika** kasir memilih varian "Besar", **maka** sistem menampilkan harga sesuai penyesuaian varian. | FR-011, FR-014 |
+| AC-010 | **Diberikan** item "Es Teh" dengan varian ukuran bermode selisih (Kecil +0, Besar +3.000), **ketika** kasir memilih varian "Besar", **maka** sistem menampilkan harga dasar + 3.000. | FR-011, FR-014 |
 | AC-011 | **Diberikan** item dengan grup modifier "Topping" (Keju +5.000, Telur +4.000), **ketika** kasir memilih Keju dan Telur, **maka** harga akhir = harga dasar + 9.000. | FR-012, FR-014 |
 | AC-012 | **Diberikan** grup modifier "Level Pedas" ditandai wajib (min 1, maks 1), **ketika** kasir menambahkan item ke order tanpa memilih level pedas, **maka** sistem menahan dan meminta pemilihan satu opsi. | FR-013, BR-008 |
+| AC-017 | **Diberikan** item "Es Teh" berharga dasar 8.000 dengan varian "Jumbo" bermode absolut seharga 11.000, **ketika** kasir memilih varian "Jumbo", **maka** sistem menampilkan harga 11.000 tanpa menjumlahkannya dengan harga dasar. | FR-011, FR-014 |
+| AC-018 | **Diberikan** item berharga dasar 8.000, **ketika** pengguna menyimpan opsi varian bermode absolut seharga 7.000, **maka** sistem menolak simpan dan menampilkan pesan harga varian tidak boleh di bawah harga dasar. | FR-011, BR-012 |
 
 **Tampilan untuk Order**
 
@@ -168,7 +173,7 @@ Acceptance Criteria menetapkan kondisi yang harus terpenuhi agar sebuah kebutuha
 | AC-014 | **Diberikan** katalog produk, **ketika** kasir mengetik sebagian nama (mis. "ayam") tanpa memperhatikan huruf besar/kecil, **maka** sistem menampilkan seluruh item yang namanya mengandung kata tersebut. | FR-015 |
 | AC-015 | **Diberikan** layar order, **ketika** kasir memilih filter kategori "Minuman", **maka** hanya item kategori tersebut yang ditampilkan. | FR-015 |
 
-> **Penutup M-001:** Seluruh User Story (US-001–US-012) telah diturunkan menjadi Functional Requirement (FR-001–FR-016), dijaga oleh Business Rules (BR-001–BR-010), dan diverifikasi melalui Acceptance Criteria (AC-001–AC-015). Modul M-001 dinyatakan **lengkap** pada level PRD dan siap dirujuk oleh dokumen desain berikutnya.
+> **Penutup M-001:** Seluruh User Story (US-001–US-012) telah diturunkan menjadi Functional Requirement (FR-001–FR-016), dijaga oleh Business Rules (BR-001–BR-012), dan diverifikasi melalui Acceptance Criteria (AC-001–AC-018). Modul M-001 dinyatakan **lengkap** pada level PRD dan siap dirujuk oleh dokumen desain berikutnya.
 
 ---
 
@@ -179,3 +184,5 @@ Acceptance Criteria menetapkan kondisi yang harus terpenuhi agar sebuah kebutuha
 | 1.0 | 2026-06-06 | Isi M-001 dipindahkan ke file modul terpisah; penyesuaian penomoran bagian (1–5) dan revisi bahasa hasil review | Project Lead |
 | 1.1 | 2026-06-06 | FR-007, BR-005, AC-007 direvisi: hapus framing soft-delete; `is_active` murni status aktif/nonaktif, pencegahan hapus via penolakan (FK referensi) | Project Lead |
 | 1.2 | 2026-08-30 | FR-001 diperluas: kategori memiliki foto opsional dan tidak lagi memakai kode kategori, mengikuti template UI dan penyesuaian skema pada [database design M-001](../05-database-design/M-001-produk-kategori.md) | Project Lead |
+| 1.3 | 2026-09-08 | Kode produk ditambahkan sebagai atribut wajib dan unik pada US-003, FR-005, dan AC-005; BR-011 dan AC-016 ditambahkan untuk keunikan kode, menyelaraskan PRD dengan `product_code` pada schema dan form ([issue #01](../20-issue/issue-01-product-code-wajib-tidak-ada-di-prd.md)) | Project Lead |
+| 1.4 | 2026-09-08 | FR-011 menegaskan dua mode harga varian (selisih dan absolut); FR-014 menyebut cara menghitung harga varian per mode; BR-012 (harga varian tidak di bawah harga dasar), AC-017, dan AC-018 ditambahkan; AC-010 ditandai sebagai mode selisih ([issue #02](../20-issue/issue-02-mode-harga-varian-absolut-tidak-didukung-schema.md)) | Project Lead |

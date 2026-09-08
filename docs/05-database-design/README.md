@@ -7,9 +7,9 @@
 |---|---|
 | **Nama Proyek** | POS Rumah Makan (Point of Sale System untuk Restoran) |
 | **Dokumen** | 05 — Database Design (folder) |
-| **Versi Dokumen** | 0.2 |
+| **Versi Dokumen** | 0.3 |
 | **Tanggal Dibuat** | 2026-06-06 |
-| **Terakhir Diperbarui** | 2026-08-30 |
+| **Terakhir Diperbarui** | 2026-09-08 |
 | **PIC** | Project Lead |
 | **Status** | Draft |
 
@@ -84,7 +84,7 @@ Detail sintaks tidak diduplikasi di sini; lihat catalog SDF RESTForge berdasarka
 | ID | Modul | Berkas Skema | Tabel | Status |
 |----|-------|-------------|-------|--------|
 | M-001 | Manajemen Produk & Kategori | [M-001-produk-kategori.md](M-001-produk-kategori.md) | `product_category`, `product`, `product_variant`, `product_modifier_group`, `product_modifier_option` | ✓ Draft lengkap |
-| M-002 | Manajemen Order | *(belum dibuat)* | — | ☐ Belum |
+| M-002 | Manajemen Order, bagian 1: data master penjualan | [M-002-master-penjualan.md](M-002-master-penjualan.md) | `customer`, `dining_table`, `employee`, `tax`, `payment_method` | ✓ Draft (tabel transaksi menyusul) |
 | … | … | … | … | … |
 
 > Penambahan modul: buat berkas `M-NNN-<nama-modul>.md`, rancang tabelnya mengikuti konvensi di atas, lalu daftarkan barisnya di tabel ini.
@@ -97,3 +97,4 @@ Detail sintaks tidak diduplikasi di sini; lihat catalog SDF RESTForge berdasarka
 |-------|---------|-----------|-----|
 | 0.1 | 2026-06-06 | Dokumen index dibuat: konvensi penamaan, kolom audit, tipe data, dan indeks modul | Project Lead |
 | 0.2 | 2026-08-30 | Tabel tipe data ditambah baris `json` untuk metadata file upload; contoh kode pendek disesuaikan setelah `category_code` dihapus | Project Lead |
+| 0.3 | 2026-09-08 | Indeks modul: M-002 bagian 1 (data master penjualan) didaftarkan dengan berkas `M-002-master-penjualan.md` | Project Lead |
