@@ -8,7 +8,7 @@
 | **ID Modul** | M-002 (bagian 1: data master) |
 | **Nama Modul** | Manajemen Order, data master pendukung |
 | **Bagian dari** | [README.md](README.md) (Database Design — index) |
-| **Versi Dokumen** | 1.2 |
+| **Versi Dokumen** | 1.3 |
 | **Tanggal Dibuat** | 2026-09-08 |
 | **Terakhir Diperbarui** | 2026-09-08 |
 | **PIC** | Project Lead |
@@ -86,12 +86,13 @@ module.exports = ({ defineModel }) => defineModel('customer', {
 });
 ```
 
-**Catatan:** Hanya `customer_name` yang wajib, karena kasir sering mencatat pelanggan hanya dengan nama saat transaksi berjalan. `phone` tidak dibuat unik agar satu nomor keluarga dapat dipakai beberapa pelanggan, tetapi diberi index karena menjadi kunci pencarian utama di kasir. `gender` boleh kosong; CHECK `in` hanya menilai nilai yang diisi karena `NULL` lolos CHECK pada PostgreSQL. `address` disediakan untuk order Delivery. Template menandai email, tanggal lahir, dan gender sebagai wajib, tetapi ketiganya dibuat opsional di sini agar input kasir tetap cepat.
+**Catatan:** Hanya `customer_name` yang wajib, karena kasir sering mencatat pelanggan hanya dengan nama saat transaksi berjalan. Satu baris tetap bernama **Pelanggan Umum** disediakan untuk pembeli yang datang langsung dan tidak perlu dicatat identitasnya; alur order M-002 memakai baris ini sebagai pelanggan default sehingga `order.customer_id` dapat selalu terisi. Baris ini tidak boleh dihapus atau dinonaktifkan; pencegahannya di layer aplikasi menjadi bagian M-002. `phone` tidak dibuat unik agar satu nomor keluarga dapat dipakai beberapa pelanggan, tetapi diberi index karena menjadi kunci pencarian utama di kasir. `gender` boleh kosong; CHECK `in` hanya menilai nilai yang diisi karena `NULL` lolos CHECK pada PostgreSQL. `address` disediakan untuk order Delivery. Template menandai email, tanggal lahir, dan gender sebagai wajib, tetapi ketiganya dibuat opsional di sini agar input kasir tetap cepat.
 
 **Contoh data:**
 
 | customer_name | phone | email | gender | is_active |
 |---|---|---|---|---|
+| Pelanggan Umum | | | | true |
 | Andi Wijaya | 081234567001 | andi@example.com | male | true |
 | Siti Rahma | 081234567002 | | female | true |
 | Budi Santoso | 081234567003 | budi@example.com | male | true |
@@ -309,3 +310,4 @@ Tidak ada action `upload` karena tidak ada kolom file. Alamat endpoint mengikuti
 | 1.0 | 2026-09-08 | Dokumen dibuat: lima tabel master penjualan (`customer`, `dining_table`, `employee`, `tax`, `payment_method`) beserta keputusan cakupan dan contoh data | Project Lead |
 | 1.1 | 2026-09-08 | Bagian 4: penegakan ganda `min` pada `seat_count` dan `tax_rate`, serta keputusan `defaultScope` (`read` dihapus, `lookup` dipertahankan) berdasarkan temuan smoke test campaign master-penjualan-v1 | Project Lead |
 | 1.2 | 2026-09-08 | Catatan implementasi: skema, payload, endpoint, contoh data, dan lima halaman frontend selesai pada campaign `master-penjualan-v1` (backend `src/pos-server` commit `e7a5a27`, `0513967`, `8899910`, `9de6860`; frontend `src/pos-frontend-integrasi` commit `f43df15`, `f2985db`, `13112aa`, `66193b5`), sudah di-merge fast-forward ke `main` kedua repo pada 2026-09-08 | Project Lead |
+| 1.3 | 2026-09-08 | Bagian 3.1: baris tetap **Pelanggan Umum** untuk pembeli yang datang langsung, ditambahkan ke contoh data dan database | Project Lead |
